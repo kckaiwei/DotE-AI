@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>AI</title>
+		<title>Aturi Cluster - AI</title>
+		<link rel="stylesheet" href="xwing-miniatures.css" />
 		<style>
 			.leftDiv {
 				float: left;
@@ -143,100 +144,147 @@
 			}
 
 			function createMoves() {
-				console.log('createMoves');
-				tFighter.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tFighter.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+				tFighter.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
 				tFighter.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tFighter.OL = ['3B', '3T', '2B', '2T', '2T', '1T'];
-				tFighter.OBL = ['4K', '3K', '3K', '2T', '2T', '1T'];
+				tFighter.OL = ['3BL', '3TL', '2BL', '2TL', '2TL', '1TL'];
+				tFighter.OR = ['3BR', '3TR', '2BR', '2TR', '2TR', '1TR'];
+				tFighter.OBL = ['4K', '3K', '3K', '2TL', '2TL', '1TL'];
+				tFighter.OBR = ['4K', '3K', '3K', '2TR', '2TR', '1TR'];
 				tFighter.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
-				tFighter.ITL = ['2F', '2B', '2B', '4K', '4K', '1T'];
+				tFighter.ITL = ['2F', '2BL', '2BL', '4K', '4K', '1TL'];
+				tFighter.ITR = ['2F', '2BR', '2BR', '4K', '4K', '1TR'];
 				tFighter.IT = ['2BL', '2BR', '2F', '2F', '4K', '4K'];
-				tFighter.IL = ['1T', '1T', '2T', '2T', '3K', '4K'];
-				tFighter.IBL = ['1T', '1T', '2T', '2T', '3K', '4K'];
+				tFighter.IL = ['1TL', '1TL', '2TL', '2TL', '3K', '4K'];
+				tFighter.IR = ['1TR', '1TR', '2TR', '2TR', '3K', '4K'];
+				tFighter.IBL = ['1TL', '1TL', '2TL', '2TL', '3K', '4K'];
+				tFighter.IBR = ['1TR', '1TR', '2TR', '2TR', '3K', '4K'];
 				tFighter.IB = ['4K', '3K', '3K', '3TL', '3TR', '5F'];
 				tFighter.RED = ['4K', '3K'];
 
-				tInt.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tInt.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+				tInt.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
 				tInt.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tInt.OL = ['3B', '3T', '2B', '2T', '2T', '1T'];
-				tInt.OBL = ['5K', '3K', '3K', '2T', '2T', '1T'];
+				tInt.OL = ['3BL', '3TL', '2BL', '2TL', '2TL', '1TL'];
+				tInt.OR = ['3BR', '3TR', '2BR', '2TR', '2TR', '1TR'];
+				tInt.OBL = ['5K', '3K', '3K', '2TL', '2TL', '1TL'];
+				tInt.OBR = ['5K', '3K', '3K', '2TR', '2TR', '1TR'];
 				tInt.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
-				tInt.ITL = ['2F', '2B', '2B', '5K', '5K', '1T'];
+				tInt.ITL = ['2F', '2BL', '2BL', '5K', '5K', '1TL'];
+				tInt.ITR = ['2F', '2BR', '2BR', '5K', '5K', '1TR'];
 				tInt.IT = ['2BL', '2BR', '2F', '2F', '5K', '5K'];
-				tInt.IL = ['1T', '1T', '2T', '2T', '3K', '5K'];
-				tInt.IBL = ['1T', '1T', '2T', '3K', '5K', '5K'];
+				tInt.IL = ['1TL', '1TL', '2TL', '2TL', '3K', '5K'];
+				tInt.IR = ['1TR', '1TR', '2TR', '2TR', '3K', '5K'];
+				tInt.IBL = ['1TL', '1TL', '2TL', '3K', '5K', '5K'];
+				tInt.IBR = ['1TR', '1TR', '2TR', '3K', '5K', '5K'];
 				tInt.IB = ['5K', '3K', '3K', '3TL', '3TR', '5F'];
 				tInt.RED = ['5K', '3K'];
 
-				tAdv.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tAdv.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+				tAdv.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
 				tAdv.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tAdv.OL = ['1B', '2B', '2T', '2T', '3T', '3T'];
-				tAdv.OBL = ['4K', '4K', '4K', '2T', '2T', '2T'];
+				tAdv.OL = ['1BL', '2BL', '2TL', '2TL', '3TL', '3TL'];
+				tAdv.OR = ['1BR', '2BR', '2TR', '2TR', '3TR', '3TR'];
+				tAdv.OBL = ['4K', '4K', '4K', '2TL', '2TL', '2TL'];
+				tAdv.OBR = ['4K', '4K', '4K', '2TR', '2TR', '2TR'];
 				tAdv.OB = ['4K', '4K', '4K', '4K', '2TL', '2TR'];
-				tAdv.ITL = ['2F', '1B', '1B', '1B', '4K', '4K'];
+				tAdv.ITL = ['2F', '1BL', '1BL', '1BL', '4K', '4K'];
+				tAdv.ITR = ['2F', '1BR', '1BR', '1BR', '4K', '4K'];
 				tAdv.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
-				tAdv.IL = ['1B', '4K', '4K', '2T', '2T', '2T'];
-				tAdv.IBL = ['4K', '4K', '4K', '2T', '2T', '1B'];
+				tAdv.IL = ['1BL', '4K', '4K', '2TL', '2TL', '2TL'];
+				tAdv.IR = ['1BR', '4K', '4K', '2TR', '2TR', '2TR'];
+				tAdv.IBL = ['4K', '4K', '4K', '2TL', '2TL', '1BL'];
+				tAdv.IBR = ['4K', '4K', '4K', '2TR', '2TR', '1BR'];
 				tAdv.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
 				tAdv.RED = ['4K'];
 
-				tPhan.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tPhan.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+				tPhan.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
 				tPhan.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-				tPhan.OL = ['1T', '1T', '2T', '2T', '3T', '2B'];
-				tPhan.OBL = ['4K', '3K', '3K', '2T', '2T', '1T'];
+				tPhan.OL = ['1TL', '1TL', '2TL', '2TL', '3TL', '2BL'];
+				tPhan.OR = ['1TR', '1TR', '2TR', '2TR', '3TR', '2BR'];
+				tPhan.OBL = ['4K', '3K', '3K', '2TL', '2TL', '1TL'];
+				tPhan.OBR = ['4K', '3K', '3K', '2TR', '2TR', '1TR'];
 				tPhan.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
-				tPhan.ITL = ['2F', '2B', '4K', '4K', '1T', '1T'];
+				tPhan.ITL = ['2F', '2BL', '4K', '4K', '1TL', '1TL'];
+				tPhan.ITR = ['2F', '2BR', '4K', '4K', '1TR', '1TR'];
 				tPhan.IT = ['2BL', '2BR', '2F', '4K', '4K', '4K'];
-				tPhan.IL = ['1T', '1T', '1T', '2T', '2T', '4K'];
-				tPhan.IBL = ['1T', '1T', '2T', '3K', '4K', '4K'];
+				tPhan.IL = ['1TL', '1TL', '1TL', '2TL', '2TL', '4K'];
+				tPhan.IR = ['1TR', '1TR', '1TR', '2TR', '2TR', '4K'];
+				tPhan.IBL = ['1TL', '1TL', '2TL', '3K', '4K', '4K'];
+				tPhan.IBR = ['1TR', '1TR', '2TR', '3K', '4K', '4K'];
 				tPhan.IB = ['4K', '3K', '3K', '3TL', '3TR', '4F'];
 				tPhan.RED = ['4K', '3K'];
 
-				tBomber.OTL = ['2F', '2B', '3B', '3B', '3B', '3T'];
+				tBomber.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+				tBomber.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
 				tBomber.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-				tBomber.OL = ['3B', '2T', '2T', '3T', '3T', '3T'];
-				tBomber.OBL = ['5K', '5K', '2T', '2T', '3T', '3T'];
+				tBomber.OL = ['3BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
+				tBomber.OR = ['3BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
+				tBomber.OBL = ['5K', '5K', '2TL', '2TL', '3TL', '3TL'];
+				tBomber.OBR = ['5K', '5K', '2TR', '2TR', '3TR', '3TR'];
 				tBomber.OB = ['5K', '5K', '5K', '5K', '2TL', '2TR'];
-				tBomber.ITL = ['3T', '1F', '1B', '1B', '1B', '5K'];
+				tBomber.ITL = ['3TL', '1F', '1BL', '1BL', '1BL', '5K'];
+				tBomber.ITR = ['3TR', '1F', '1BR', '1BR', '1BR', '5K'];
 				tBomber.IT = ['1BL', '1BR', '1F', '1F', '1F', '5K'];
-				tBomber.IL = ['1B', '2T', '2T', '3T', '3T', '3T'];
-				tBomber.IBL = ['5K', '5K', '5K', '3T', '3T', '2T'];
+				tBomber.IL = ['1BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
+				tBomber.IR = ['1BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
+				tBomber.IBL = ['5K', '5K', '5K', '3TL', '3TL', '2TL'];
+				tBomber.IBR = ['5K', '5K', '5K', '3TR', '3TR', '2TR'];
 				tBomber.IB = ['5K', '5K', '5K', '5K', '3TL', '3TR'];
 				tBomber.RED = ['5K', '2T', '2TL', '2TR'];
 
-				tDef.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tDef.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+				tDef.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
 				tDef.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tDef.OL = ['1B', '2B', '2T', '3T', '3T', '3T'];
-				tDef.OBL = ['4K', '4K', '4K', '2T', '2T', '1T'];
+				tDef.OL = ['1BL', '2BL', '2TL', '3TL', '3TL', '3TL'];
+				tDef.OR = ['1BR', '2BR', '2TR', '3TR', '3TR', '3TR'];
+				tDef.OBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
+				tDef.OBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
 				tDef.OB = ['4K', '4K', '4K', '4K', '1TL', '1TR'];
-				tDef.ITL = ['2F', '1B', '1B', '4K', '4K', '1T'];
+				tDef.ITL = ['2F', '1BL', '1BL', '4K', '4K', '1TL'];
+				tDef.ITR = ['2F', '1BR', '1BR', '4K', '4K', '1TR'];
 				tDef.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
-				tDef.IL = ['1B', '4K', '4K', '2T', '1T', '1T'];
-				tDef.IBL = ['4K', '4K', '4K', '2T', '2T', '1T'];
+				tDef.IL = ['1BL', '4K', '4K', '2TL', '1TL', '1TL'];
+				tDef.IR = ['1BR', '4K', '4K', '2TR', '1TR', '1TR'];
+				tDef.IBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
+				tDef.IBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
 				tDef.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
-				tDef.RED = ['1T', '2T', '1TL', '1TR'];
+				tDef.RED = ['1T', '2TL', '2TR', '1TL', '1TR'];
 
-				vtDec.OTL = ['4F', '3B', '3B', '3B', '2B', '3T'];
+				vtDec.OTL = ['4F', '3BL', '3BL', '3BL', '2BL', '3TL'];
+				vtDec.OTR = ['4F', '3BR', '3BR', '3BR', '2BR', '3TR'];
 				vtDec.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-				vtDec.OL = ['3B', '3T', '3T', '2T', '2T', '1B'];
-				vtDec.OBL = ['2T', '2T', '2T', '3T', '3T', '1B'];
+				vtDec.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '1BL'];
+				vtDec.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '1BR'];
+				vtDec.OBL = ['2TL', '2TL', '2TL', '3TL', '3TL', '1BL'];
+				vtDec.OBR = ['2TR', '2TR', '2TR', '3TR', '3TR', '1BR'];
 				vtDec.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
-				vtDec.ITL = ['3B', '3B', '2B', '2T', '4F', '4F'];
+				vtDec.ITL = ['3BL', '3BL', '2BL', '2TL', '4F', '4F'];
+				vtDec.ITR = ['3BR', '3BR', '2BR', '2TR', '4F', '4F'];
 				vtDec.IT = ['4F', '4F', '3BL', '3BR', '3TL', '3TR'];
-				vtDec.IL = ['3B', '3B', '3T', '2B', '2T', '1B'];
-				vtDec.IBL = ['3B', '3B', '3T', '2B', '2T', '1B'];
+				vtDec.IL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
+				vtDec.IR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
+				vtDec.IBL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
+				vtDec.IBR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
 				vtDec.IB = ['3TL', '2TL', '1B', '3TR', '2TR', '1BR'];
 				vtDec.RED = [];
 
-				lambda.OTL = ['2F', '3B', '2B', '2B', '2B', '2T'];
+				lambda.OTL = ['2F', '3BL', '2BL', '2BL', '2BL', '2TL'];
+				lambda.OTR = ['2F', '3BR', '2BR', '2BR', '2BR', '2TR'];
 				lambda.OT = ['3F', '3F', '3F', '2T', '2T', '1F'];
-				lambda.OL = ['2T', '2T', '2T', '2T', '2B', '3B'];
-				lambda.OBL = ['2T', '2T', '2T', '2T', '1B', '1B'];
+				lambda.OL = ['2TL', '2TL', '2TL', '2TL', '2BL', '3BL'];
+				lambda.OR = ['2TR', '2TR', '2TR', '2TR', '2BR', '3BR'];
+				lambda.OBL = ['2TL', '2TL', '2TL', '2TL', '1BL', '1BL'];
+				lambda.OBR = ['2TR', '2TR', '2TR', '2TR', '1BR', '1BR'];
 				lambda.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
-				lambda.ITL = ['0S', '1F', '1B', '1B', '1B', '2T'];
+				lambda.ITL = ['0S', '1F', '1BL', '1BL', '1BL', '2TL'];
+				lambda.ITR = ['0S', '1F', '1BR', '1BR', '1BR', '2TR'];
 				lambda.IT = ['0S', '0S', '0S', '1F', '1BR', '1BL'];
-				lambda.IL = ['0S', '2T', '2T', '2T', '1B', '2B'];
-				lambda.IBL = ['0S', '2T', '2T', '2T', '2B', '3B'];
+				lambda.IL = ['0S', '2TL', '2TL', '2TL', '1BL', '2BL'];
+				lambda.IR = ['0S', '2TR', '2TR', '2TR', '1BR', '2BR'];
+				lambda.IBL = ['0S', '2TL', '2TL', '2TL', '2BL', '3BL'];
+				lambda.IBR = ['0S', '2TR', '2TR', '2TR', '2BR', '3BR'];
 				lambda.IB = ['0S', '0S', '2TR', '2TL', '3BR', '3BL'];
 				lambda.RED = ['0S', '2T', '2TL', '2TR', '3B', '3BL', '3BR'];
 			}
@@ -245,91 +293,91 @@
 				var string = '';
 				switch(move) {
 					case '0S':
-						string = "Full Stop";
+						string = "0 <i class='xwing-miniatures-font xwing-miniatures-font-stop'></i>";
 						break;
 					case '1T':
 						string = "1 Hard Turn";
 						break;
 					case '1TL':
-						string = "1 Hard Turn Left";
+						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
 						break;
 					case '1TR':
-						string = "1 Hard Turn Right";
+						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
 						break;
 					case '2T':
 						string = "2 Hard Turn";
 						break;
 					case '2TL':
-						string = "2 Hard Turn Left";
+						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
 						break;
 					case '2TR':
-						string = "2 Hard Turn Right";
+						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
 						break;
 					case '3T':
 						string = "3 Hard Turn";
 						break;
 					case '3TL':
-						string = "3 Hard Turn Left";
+						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
 						break;
 					case '3TR':
-						string = "3 Hard Turn Right";
+						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
 						break;
 					case '1B':
 						string = "1 Bank";
 						break;
 					case '1BL':
-						string = "1 Bank Left";
+						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
 						break;
 					case '1BR':
-						string = "1 Bank Right";
+						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-bankright'></i>";
 						break;
 					case '2B':
 						string = "2 Bank";
 						break;
 					case '2BL':
-						string = "2 Bank Left";
+						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
 						break;
 					case '2BR':
-						string = "2 Bank Right";
+						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-bankright'></i>";
 						break;
 					case '3B':
 						string = "3 Bank";
 						break;
 					case '3BL':
-						string = "3 Bank Left";
+						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
 						break;
 					case '3BR':
-						string = "3 Bank Right";
+						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-bankright'></i>";
 						break;
 					case '1F':
-						string = "1 Forward";
+						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-straight'></i>";
 						break;
 					case '2F':
-						string = "2 Forward";
+						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-straight'></i>";
 						break;
 					case '3F':
-						string = "3 Forward";
+						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-straight'></i>";
 						break;
 					case '4F':
-						string = "4 Forward";
+						string = "4 <i class='xwing-miniatures-font xwing-miniatures-font-straight'></i>";
 						break;
 					case '5F':
-						string = "5 Forward";
+						string = "5 <i class='xwing-miniatures-font xwing-miniatures-font-straight'></i>";
 						break;
 					case '1K':
-						string = "1 K-Turn";
+						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-kturn'></i>";
 						break;
 					case '2K':
-						string = "2 K-Turn";
+						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-kturn'></i>";
 						break;
 					case '3K':
-						string = "3 K-Turn";
+						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-kturn'></i>";
 						break;
 					case '4K':
-						string = "4 K-Turn";
+						string = "4 <i class='xwing-miniatures-font xwing-miniatures-font-kturn'></i>";
 						break;
 					case '5K':
-						string = "5 K-Turn";
+						string = "5 <i class='xwing-miniatures-font xwing-miniatures-font-kturn'></i>";
 						break;
 				}
 				return string;
@@ -348,13 +396,13 @@
 						shipMove = aiShip.OT[(n-1)];
 						break;
 					case 'OTR':
-						shipMove = aiShip.OTL[(n-1)];
+						shipMove = aiShip.OTR[(n-1)];
 						break;
 					case 'OL':
 						shipMove = aiShip.OL[(n-1)];
 						break;
 					case 'OR':
-						shipMove = aiShip.OL[(n-1)];
+						shipMove = aiShip.OR[(n-1)];
 						break;
 					case 'OBL':
 						shipMove = aiShip.OBL[(n-1)];
@@ -363,7 +411,7 @@
 						shipMove = aiShip.OB[(n-1)];
 						break;
 					case 'OBR':
-						shipMove = aiShip.OBL[(n-1)];
+						shipMove = aiShip.OBR[(n-1)];
 						break;
 					case 'ITL':
 						shipMove = aiShip.ITL[(n-1)];
@@ -372,13 +420,13 @@
 						shipMove = aiShip.IT[(n-1)];
 						break;
 					case 'ITR':
-						shipMove = aiShip.ITL[(n-1)];
+						shipMove = aiShip.ITR[(n-1)];
 						break;
 					case 'IL':
 						shipMove = aiShip.IL[(n-1)];
 						break;
 					case 'IR':
-						shipMove = aiShip.IL[(n-1)];
+						shipMove = aiShip.IR[(n-1)];
 						break;
 					case 'IBL':
 						shipMove = aiShip.IBL[(n-1)];
@@ -387,10 +435,9 @@
 						shipMove = aiShip.IB[(n-1)];
 						break;
 					case 'IBR':
-						shipMove = aiShip.IBL[(n-1)];
+						shipMove = aiShip.IBR[(n-1)];
 						break;
 					default:
-						console.log('You must choose a ship');
 						break;
 				}
 				for (r in aiShip.RED) {
@@ -412,7 +459,6 @@
 			}
 
 			function createButtons() {
-				console.log('createButtons');
 				buttonCoordinates.push(new Button(50,50,'OTL'));
 				buttonCoordinates.push(new Button(275,25,'OT'));
 				buttonCoordinates.push(new Button(500,50,'OTR'));
@@ -437,7 +483,6 @@
 			}
 
 			function setShip(val) {
-				console.log('setShip');
 				switch(val) {
 					case 'tFighter':
 						aiShip = tFighter;
