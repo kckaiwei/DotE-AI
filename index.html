@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>AI</title>
+		<style>
+			.leftDiv {
+				float: left;
+				padding: 10px;
+			}
+			.red {
+				color: #FF0000;
+			}
+		</style>
+		<script type="text/javascript">
+
+			var canvas, ctx;
+			var buttonCoordinates = [];
+			var aiShip;
+			var tFighter = {}, tInt = {}, tAdv = {}, tPhan = {}, tBomber = {}, tDef = {}, vtDec = {}, lambda = {};
+
+			function draw() {
+				canvas = document.getElementById("canvas");
+				ctx = canvas.getContext("2d");
+
+				canvas.addEventListener("mousedown", getPosition, false);
+
+				//Fill Background
+				ctx.fillStyle = "#A1D490";
+				ctx.fillRect(0,0,600,600);
+
+				//Create Circle
+				ctx.beginPath();
+				ctx.arc(300,300,200,0,360, false);
+				ctx.fillStyle = "#D4A190";
+				ctx.stroke();
+				ctx.fill();
+
+				//Front Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(165,0);
+				ctx.lineTo(435,0);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Back Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(435,600);
+				ctx.lineTo(165,600);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Front Right Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(435,0);
+				ctx.lineTo(600,0);
+				ctx.lineTo(600,165);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Front Left Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(165,0);
+				ctx.lineTo(0,0);
+				ctx.lineTo(0,165);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Right Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(600,165);
+				ctx.lineTo(600,435);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Left Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(0,165);
+				ctx.lineTo(0,435);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Back Right Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(600,435);
+				ctx.lineTo(600,600);
+				ctx.lineTo(435,600);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Back Right Arc
+				ctx.beginPath();
+				ctx.moveTo(300,300);
+				ctx.lineTo(0,435);
+				ctx.lineTo(0,600);
+				ctx.lineTo(165,600);
+				ctx.lineTo(300,300);
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+
+				//Create Ship
+				ctx.fillStyle = "white";
+				ctx.fillRect(250,250,100,100);
+				ctx.strokeStyle = "black";
+				ctx.strokeRect(250,250,100,100);
+
+				createButtons();
+			}		
+
+			function getPosition(event) {
+
+				var x = event.x;
+				var y = event.y;
+
+				x -= canvas.offsetLeft;
+				y -= canvas.offsetTop;
+
+				for (b in buttonCoordinates) {
+					if (x >= buttonCoordinates[b].x1 && y >= buttonCoordinates[b].y1 && x <= buttonCoordinates[b].x2 && y <= buttonCoordinates[b].y2) {
+						pickMove(buttonCoordinates[b].id);
+					}
+				}
+			}
+
+			function createMoves() {
+				tFighter.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tFighter.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+				tFighter.OL = ['3B', '3T', '2B', '2T', '2T', '1T'];
+				tFighter.OBL = ['4K', '3K', '3K', '2T', '2T', '1T'];
+				tFighter.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
+				tFighter.ITL = ['2F', '2B', '2B', '4K', '4K', '1T'];
+				tFighter.IT = ['2BL', '2BR', '2F', '2F', '4K', '4K'];
+				tFighter.IL = ['1T', '1T', '2T', '2T', '3K', '4K'];
+				tFighter.IBL = ['1T', '1T', '2T', '2T', '3K', '4K'];
+				tFighter.IB = ['4K', '3K', '3K', '3TL', '3TR', '5F'];
+				tFighter.RED = ['4K', '3K'];
+
+				tInt.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tInt.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+				tInt.OL = ['3B', '3T', '2B', '2T', '2T', '1T'];
+				tInt.OBL = ['5K', '3K', '3K', '2T', '2T', '1T'];
+				tInt.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
+				tInt.ITL = ['2F', '2B', '2B', '5K', '5K', '1T'];
+				tInt.IT = ['2BL', '2BR', '2F', '2F', '5K', '5K'];
+				tInt.IL = ['1T', '1T', '2T', '2T', '3K', '5K'];
+				tInt.IBL = ['1T', '1T', '2T', '3K', '5K', '5K'];
+				tInt.IB = ['5K', '3K', '3K', '3TL', '3TR', '5F'];
+				tInt.RED = ['5K', '3K'];
+
+				tAdv.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tAdv.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+				tAdv.OL = ['1B', '2B', '2T', '2T', '3T', '3T'];
+				tAdv.OBL = ['4K', '4K', '4K', '2T', '2T', '2T'];
+				tAdv.OB = ['4K', '4K', '4K', '4K', '2TL', '2TR'];
+				tAdv.ITL = ['2F', '1B', '1B', '1B', '4K', '4K'];
+				tAdv.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
+				tAdv.IL = ['1B', '4K', '4K', '2T', '2T', '2T'];
+				tAdv.IBL = ['4K', '4K', '4K', '2T', '2T', '1B'];
+				tAdv.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
+				tAdv.RED = ['4K'];
+
+				tPhan.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tPhan.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
+				tPhan.OL = ['1T', '1T', '2T', '2T', '3T', '2B'];
+				tPhan.OBL = ['4K', '3K', '3K', '2T', '2T', '1T'];
+				tPhan.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
+				tPhan.ITL = ['2F', '2B', '4K', '4K', '1T', '1T'];
+				tPhan.IT = ['2BL', '2BR', '2F', '4K', '4K', '4K'];
+				tPhan.IL = ['1T', '1T', '1T', '2T', '2T', '4K'];
+				tPhan.IBL = ['1T', '1T', '2T', '3K', '4K', '4K'];
+				tPhan.IB = ['4K', '3K', '3K', '3TL', '3TR', '4F'];
+				tPhan.RED = ['4K', '3K'];
+
+				tBomber.OTL = ['2F', '2B', '3B', '3B', '3B', '3T'];
+				tBomber.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
+				tBomber.OL = ['3B', '2T', '2T', '3T', '3T', '3T'];
+				tBomber.OBL = ['5K', '5K', '2T', '2T', '3T', '3T'];
+				tBomber.OB = ['5K', '5K', '5K', '5K', '2TL', '2TR'];
+				tBomber.ITL = ['3T', '1F', '1B', '1B', '1B', '5K'];
+				tBomber.IT = ['1BL', '1BR', '1F', '1F', '1F', '5K'];
+				tBomber.IL = ['1B', '2T', '2T', '3T', '3T', '3T'];
+				tBomber.IBL = ['5K', '5K', '5K', '3T', '3T', '2T'];
+				tBomber.IB = ['5K', '5K', '5K', '5K', '3TL', '3TR'];
+				tBomber.RED = ['5K', '2T', '2TL', '2TR'];
+
+				tDef.OTL = ['3F', '2B', '3B', '3B', '3B', '3T'];
+				tDef.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+				tDef.OL = ['1B', '2B', '2T', '3T', '3T', '3T'];
+				tDef.OBL = ['4K', '4K', '4K', '2T', '2T', '1T'];
+				tDef.OB = ['4K', '4K', '4K', '4K', '1TL', '1TR'];
+				tDef.ITL = ['2F', '1B', '1B', '4K', '4K', '1T'];
+				tDef.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
+				tDef.IL = ['1B', '4K', '4K', '2T', '1T', '1T'];
+				tDef.IBL = ['4K', '4K', '4K', '2T', '2T', '1T'];
+				tDef.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
+				tDef.RED = ['1T', '2T', '1TL', '1TR'];
+
+				vtDec.OTL = ['4F', '3B', '3B', '3B', '2B', '3T'];
+				vtDec.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
+				vtDec.OL = ['3B', '3T', '3T', '2T', '2T', '1B'];
+				vtDec.OBL = ['2T', '2T', '2T', '3T', '3T', '1B'];
+				vtDec.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
+				vtDec.ITL = ['3B', '3B', '2B', '2T', '4F', '4F'];
+				vtDec.IT = ['4F', '4F', '3BL', '3BR', '3TL', '3TR'];
+				vtDec.IL = ['3B', '3B', '3T', '2B', '2T', '1B'];
+				vtDec.IBL = ['3B', '3B', '3T', '2B', '2T', '1B'];
+				vtDec.IB = ['3TL', '2TL', '1B', '3TR', '2TR', '1BR'];
+				vtDec.RED = [];
+
+				lambda.OTL = ['2F', '3B', '2B', '2B', '2B', '2T'];
+				lambda.OT = ['3F', '3F', '3F', '2T', '2T', '1F'];
+				lambda.OL = ['2T', '2T', '2T', '2T', '2B', '3B'];
+				lambda.OBL = ['2T', '2T', '2T', '2T', '1B', '1B'];
+				lambda.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
+				lambda.ITL = ['0S', '1F', '1B', '1B', '1B', '2T'];
+				lambda.IT = ['0S', '0S', '0S', '1F', '1BR', '1BL'];
+				lambda.IL = ['0S', '2T', '2T', '2T', '1B', '2B'];
+				lambda.IBL = ['0S', '2T', '2T', '2T', '2B', '3B'];
+				lambda.IB = ['0S', '0S', '2TR', '2TL', '3BR', '3BL'];
+				lambda.RED = ['0S', '2T', '2TL', '2TR', '3B', '3BL', '3BR'];
+			}
+
+			function setMove(move) {
+				var string = '';
+				switch(move) {
+					case '0S':
+						string = "Full Stop";
+						break;
+					case '1T':
+						string = "1 Hard Turn";
+						break;
+					case '1TL':
+						string = "1 Hard Turn Left";
+						break;
+					case '1TR':
+						string = "1 Hard Turn Right";
+						break;
+					case '2T':
+						string = "2 Hard Turn";
+						break;
+					case '2TL':
+						string = "2 Hard Turn Left";
+						break;
+					case '2TR':
+						string = "2 Hard Turn Right";
+						break;
+					case '3T':
+						string = "3 Hard Turn";
+						break;
+					case '3TL':
+						string = "3 Hard Turn Left";
+						break;
+					case '3TR':
+						string = "3 Hard Turn Right";
+						break;
+					case '1B':
+						string = "1 Bank";
+						break;
+					case '1BL':
+						string = "1 Bank Left";
+						break;
+					case '1BR':
+						string = "1 Bank Right";
+						break;
+					case '2B':
+						string = "2 Bank";
+						break;
+					case '2BL':
+						string = "2 Bank Left";
+						break;
+					case '2BR':
+						string = "2 Bank Right";
+						break;
+					case '3B':
+						string = "3 Bank";
+						break;
+					case '3BL':
+						string = "3 Bank Left";
+						break;
+					case '3BR':
+						string = "3 Bank Right";
+						break;
+					case '1F':
+						string = "1 Forward";
+						break;
+					case '2F':
+						string = "2 Forward";
+						break;
+					case '3F':
+						string = "3 Forward";
+						break;
+					case '4F':
+						string = "4 Forward";
+						break;
+					case '5F':
+						string = "5 Forward";
+						break;
+					case '1K':
+						string = "1 K-Turn";
+						break;
+					case '2K':
+						string = "2 K-Turn";
+						break;
+					case '3K':
+						string = "3 K-Turn";
+						break;
+					case '4K':
+						string = "4 K-Turn";
+						break;
+					case '5K':
+						string = "5 K-Turn";
+						break;
+				}
+				return string;
+			}
+
+
+			function pickMove(id) {
+				var shipMove;
+				var n = generate();
+				document.getElementById('move').className = "";
+				switch (id) {
+					case 'OTL':
+						shipMove = aiShip.OTL[(n-1)];
+						break;
+					case 'OT':
+						shipMove = aiShip.OT[(n-1)];
+						break;
+					case 'OTR':
+						shipMove = aiShip.OTL[(n-1)];
+						break;
+					case 'OL':
+						shipMove = aiShip.OL[(n-1)];
+						break;
+					case 'OR':
+						shipMove = aiShip.OL[(n-1)];
+						break;
+					case 'OBL':
+						shipMove = aiShip.OBL[(n-1)];
+						break;
+					case 'OB':
+						shipMove = aiShip.OB[(n-1)];
+						break;
+					case 'OBR':
+						shipMove = aiShip.OBL[(n-1)];
+						break;
+					case 'ITL':
+						shipMove = aiShip.ITL[(n-1)];
+						break;
+					case 'IT':
+						shipMove = aiShip.IT[(n-1)];
+						break;
+					case 'ITR':
+						shipMove = aiShip.ITL[(n-1)];
+						break;
+					case 'IL':
+						shipMove = aiShip.IL[(n-1)];
+						break;
+					case 'IR':
+						shipMove = aiShip.IL[(n-1)];
+						break;
+					case 'IBL':
+						shipMove = aiShip.IBL[(n-1)];
+						break;
+					case 'IB':
+						shipMove = aiShip.IB[(n-1)];
+						break;
+					case 'IBR':
+						shipMove = aiShip.IBL[(n-1)];
+						break;
+					default:
+						console.log('You must choose a ship');
+						break;
+				}
+				for (r in aiShip.RED) {
+					if (shipMove == aiShip.RED[r]) {
+						document.getElementById('move').classList.add('red');
+					}
+				}
+				document.getElementById('move').innerHTML = setMove(shipMove);
+			}
+
+			function generate() {
+				var num = Math.floor(Math.random() * (7 - 1)) + 1;
+				return num;
+			}
+
+			function pointInCircle(x, y, cx, cy, radius) {
+				var distanceSquared = (x - cx) * (x - cx) + (y - cy) * (y - cy);
+				return distanceSquared <= (radius * radius);
+			}
+
+			function createButtons() {
+				buttonCoordinates.push(new Button(50,50,'OTL'));
+				buttonCoordinates.push(new Button(275,25,'OT'));
+				buttonCoordinates.push(new Button(500,50,'OTR'));
+				buttonCoordinates.push(new Button(25,275,'OL'));
+				buttonCoordinates.push(new Button(525,275,'OR'));
+				buttonCoordinates.push(new Button(50,475,'OBL'));
+				buttonCoordinates.push(new Button(275,525,'OB'));
+				buttonCoordinates.push(new Button(500,475,'OBR'));
+
+				buttonCoordinates.push(new Button(175,175,'ITL'));
+				buttonCoordinates.push(new Button(275,150,'IT'));
+				buttonCoordinates.push(new Button(375,175,'ITR'));
+				buttonCoordinates.push(new Button(150,275,'IL'));
+				buttonCoordinates.push(new Button(400,275,'IR'));
+				buttonCoordinates.push(new Button(175,375,'IBL'));
+				buttonCoordinates.push(new Button(275,400,'IB'));
+				buttonCoordinates.push(new Button(375,375,'IBR'));
+
+				for (b in buttonCoordinates) {
+					ctx.fillRect(buttonCoordinates[b].x1, buttonCoordinates[b].y1,50,50);
+				}
+			}
+
+			function setShip(val) {
+				switch(val) {
+					case 'tFighter':
+						aiShip = tFighter;
+						break;
+					case 'tInt':
+						aiShip = tInt;
+						break;
+					case 'tAdv':
+						aiShip = tAdv;
+						break;
+					case 'tPhan':
+						aiShip = tPhan;
+						break;
+					case 'tBomber':
+						aiShip = tBomber;
+						break;
+					case 'tDef':
+						aiShip = tDef;
+						break;
+					case 'vtDec':
+						aiShip = vtDec;
+						break;
+					case 'lambda':
+						aiShip = lambda;
+						break;
+					default:
+						break;
+				}
+			}
+
+			function Button(x,y,id) {
+				this.x1 = x;
+				this.y1 = y;
+				this.x2 = x + 50;
+				this.y2 = y + 50;
+				this.id = id;
+			}
+
+		</script>
+		<style type="text/css">
+			canvas { 
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body onload="draw();">
+		<div class="leftDiv">
+			<canvas id="canvas" width="600" height="600"></canvas>
+		</div>
+		<div class="leftDiv">
+			<div>
+				<select id="shipType" onchange="setShip(this.value)">
+					<option value="none">Select a Ship</option>
+					<option value="tFighter">TIE Fighter</option>
+					<option value="tInt">TIE Interceptor</option>
+					<option value="tAdv">TIE Advanced</option>
+					<option value="tPhan">TIE Phantom</option>
+					<option value="tBomber">TIE Bomber</option>
+					<option value="tDef">TIE Defender</option>
+					<option value="vtDec">VT-49 Decimator</option>
+					<option value="lambda">Lambda Shuttle</option>
+				</select>
+			</div>
+			<div>
+				<h2>Maneuver</h2>
+				<span id="move"></span>
+			</div>
+		</div>
+	</body>
+</html>
