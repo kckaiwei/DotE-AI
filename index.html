@@ -119,6 +119,11 @@
 				ctx.strokeRect(250,250,100,100);
 
 				createButtons();
+
+				document.getElementById('shipType').onchange = function() {
+					setShip(this.value);
+				}
+
 			}		
 
 			function getPosition(event) {
@@ -481,7 +486,7 @@
 		</div>
 		<div class="leftDiv">
 			<div>
-				<select id="shipType" onchange="setShip(this.value)">
+				<select id="shipType">
 					<option value="none">Select a Ship</option>
 					<option value="tFighter">TIE Fighter</option>
 					<option value="tInt">TIE Interceptor</option>
