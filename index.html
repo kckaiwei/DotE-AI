@@ -3,6 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Aturi Cluster - AI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<link rel="stylesheet" href="xwing-miniatures.css" />
 		<style>
 			.leftDiv {
@@ -275,7 +279,7 @@
 
 				lambda.OTL = ['2F', '3BL', '2BL', '2BL', '2BL', '2TL'];
 				lambda.OTR = ['2F', '3BR', '2BR', '2BR', '2BR', '2TR'];
-				lambda.OT = ['3F', '3F', '3F', '2T', '2T', '1F'];
+				lambda.OT = ['3F', '3F', '3F', '2TL', '2TR', '1F'];
 				lambda.OL = ['2TL', '2TL', '2TL', '2TL', '2BL', '3BL'];
 				lambda.OR = ['2TR', '2TR', '2TR', '2TR', '2BR', '3BR'];
 				lambda.OBL = ['2TL', '2TL', '2TL', '2TL', '1BL', '1BL'];
@@ -532,31 +536,37 @@
 		</style>
 	</head>
 	<body onload="draw();">
-		<div class="leftDiv">
-			<canvas id="canvas" width="600" height="600"></canvas>
+	<div data-role="page">
+		<div data-role="header">
+			Aturi Cluster - AI
 		</div>
-		<div class="leftDiv">
+		<div role="main" class="ui-content">
 			<div>
-				<select id="shipType">
-					<option value="none">Select a Ship</option>
-					<option value="tFighter">TIE Fighter</option>
-					<option value="tInt">TIE Interceptor</option>
-					<option value="tAdv">TIE Advanced</option>
-					<option value="tPhan">TIE Phantom</option>
-					<option value="tBomber">TIE Bomber</option>
-					<option value="tDef">TIE Defender</option>
-					<option value="vtDec">VT-49 Decimator</option>
-					<option value="lambda">Lambda Shuttle</option>
-				</select>
+				<canvas id="canvas" width="600" height="600"></canvas>
 			</div>
 			<div>
-				<h2>Maneuver</h2>
-				<span id="move" style="font-size: xx-large;"></span>
+				<div>
+					<select id="shipType">
+						<option value="none">Select a Ship</option>
+						<option value="tFighter">TIE Fighter</option>
+						<option value="tInt">TIE Interceptor</option>
+						<option value="tAdv">TIE Advanced</option>
+						<option value="tPhan">TIE Phantom</option>
+						<option value="tBomber">TIE Bomber</option>
+						<option value="tDef">TIE Defender</option>
+						<option value="vtDec">VT-49 Decimator</option>
+						<option value="lambda">Lambda Shuttle</option>
+					</select>
+				</div>
+				<div>
+					<h2>Maneuver</h2>
+					<span id="move" style="font-size: xx-large;"></span>
+				</div>
 			</div>
 		</div>
-		<div class="clrFlt"></div>
-		<div>
+		<div data-role="footer">
 			<span style="font-size: xx-small;">X-Wing Symbols: <a href="https://github.com/Hinny">Hinny</a> and <a href="https://github.com/armoredgear7">Josh Derksen</a><br />AI Logic: <a href="http://dockingbay416.com/campaign/">Heroes of the Aturi Cluster Campaign</a></span>
 		</div>
+	</div>
 	</body>
 </html>
