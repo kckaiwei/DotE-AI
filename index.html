@@ -3,10 +3,6 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Aturi Cluster - AI</title>
-		<!--<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
 		<link rel="stylesheet" href="xwing-miniatures.css" />
 		<style>
 			.leftDiv {
@@ -47,11 +43,6 @@
 				}
 				for (var src in sources) {
 					images[src] = new Image();
-					images[src].onload = function() {
-						if(++loadedImages >= numImages) {
-							callback(images);
-						}
-					};
 					images[src].src = sources[src];
 				}
 			}
@@ -587,11 +578,11 @@
 	<body onload="draw();">
 	<div>
 		<div>
-			<div>
+			<div class="leftDiv">
 				<canvas id="canvas" width="600" height="600"></canvas>
 			</div>
 			
-				<div>
+				<div class="leftDiv">
 					<select id="shipType">
 						<option value="none">Select a Ship</option>
 						<option value="tFighter">TIE Fighter</option>
@@ -604,12 +595,13 @@
 						<option value="lambda">Lambda Shuttle</option>
 					</select>
 				</div>
-				<div>
+				<div class="clrFlt"></div>
+				<div class="leftDiv">
 					<h2>Maneuver</h2>
 					<span id="move" style="font-size: xx-large;"></span>
 				</div>
 		</div>
-		<div>
+		<div class="clrFlt">
 			<span style="font-size: xx-small;">X-Wing Symbols: <a href="https://github.com/Hinny">Hinny</a> and <a href="https://github.com/armoredgear7">Josh Derksen</a><br />AI Logic: <a href="http://dockingbay416.com/campaign/">Heroes of the Aturi Cluster Campaign</a></span>
 		</div>
 	</div>
