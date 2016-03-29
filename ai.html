@@ -4,13 +4,16 @@
 	<title>Page Title</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="stylesheet" href="xwing-miniatures.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<style>
 		.center {
 		    text-align: center;
+		}
+		.red {
+			color: #FF0000;
 		}
 	</style>
 </head>
@@ -53,8 +56,10 @@
 			</div>
 		    <div class="ui-block-b" style="width:20%;">
 				<div class="ui-bar ui-bar-a" id="maneuver">
-					<div id="close"></div>
-					<div id="far"></div>
+					<h3 class="ui-bar ui-bar-a">Range 1/2</h3>
+					<div class="ui-body" id="close"></div>
+					<h3 class="ui-bar ui-bar-a">Range 2/3</h3>
+					<div class="ui-bar" id="far"></div>
 				</div>
 			</div>
 		</div><!-- /grid-a -->
@@ -101,17 +106,15 @@
 			}
 		});
 		$('.move').click(function() {
-			//$('#maneuver').html(this.id);
-			//console.log(randomize());
-			//console.log(shipId['OTL'][randomize()]);
 			moves = generateMoves(this.id);
 		});
 
 		var generateMoves = function(id) {
+			$('#close').removeClass('red');
+			$('#far').removeClass('red');
 			var close, far;
 			switch(id) {
 				case 'ul':
-					//console.log('ul');
 					close = 'ITL';
 					far = 'OTL';
 					break;
@@ -147,18 +150,22 @@
 			var textClose = shipId[close][randomize()];
 			var textFar = shipId[far][randomize()];
 			$('#close').html(returnIcon(textClose));
-			$('#far').html(returnIcon(textFar));			
+			$('#far').html(returnIcon(textFar));
+			for (r in shipId.RED) {
+				if (textClose == shipId.RED[r]) {
+					$('#close').addClass('red');
+				}
+				if (textFar == shipId.RED[r]) {
+					$('#far').addClass('red');
+				}
+			}			
 		}
 
 		var returnIcon = function(move) {
-			console.log(move);
 			var string = '';
 			switch(move) {
 					case '0S':
 						string = "0 <i class='xwing-miniatures-font xwing-miniatures-font-stop'></i>";
-						break;
-					case '1T':
-						string = "1 Hard Turn";
 						break;
 					case '1TL':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
@@ -166,17 +173,11 @@
 					case '1TR':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
 						break;
-					case '2T':
-						string = "2 Hard Turn";
-						break;
 					case '2TL':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
 						break;
 					case '2TR':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
-						break;
-					case '3T':
-						string = "3 Hard Turn";
 						break;
 					case '3TL':
 						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
@@ -184,26 +185,17 @@
 					case '3TR':
 						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
 						break;
-					case '1B':
-						string = "1 Bank";
-						break;
 					case '1BL':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
 						break;
 					case '1BR':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-bankright'></i>";
 						break;
-					case '2B':
-						string = "2 Bank";
-						break;
 					case '2BL':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
 						break;
 					case '2BR':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-bankright'></i>";
-						break;
-					case '3B':
-						string = "3 Bank";
 						break;
 					case '3BL':
 						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
