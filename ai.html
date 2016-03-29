@@ -23,7 +23,7 @@
 	<div role="main" class="ui-content">
 		<form>
 		<div class="ui-field-contain">
-		    <select name="select-native-2" id="select-native-2" data-mini="true">
+		    <select id="shipType" name="select-native-2" id="select-native-2" data-mini="true">
 		        <option value="1">TIE Fighter</option>
 		        <option value="2">TIE Interceptor</option>
 		        <option value="3">TIE Advanced</option>
@@ -35,12 +35,32 @@
 		    </select>
 		</div>
 		</form>
+		<div class="ui-grid-d center">
+		    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext ui-btn-inline">Button</a></div>
+		    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline">Button</a></div>
+		    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext ui-btn-inline">Button</a></div>
+			<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext ui-btn-inline">Button</a></div>
+		    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline">Button</a></div>
+		    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext ui-btn-inline">Button</a></div>
+			<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext ui-btn-inline">Button</a></div>
+		    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline">Button</a></div>
+		    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext ui-btn-inline">Button</a></div>
+		</div>
 	</div><!-- /content -->
 
 	<div data-role="footer">
 		<h4>Created by frbfli</h4>
 	</div><!-- /footer -->
 </div><!-- /page -->
+
+<script>
+	$(document).ready(function() {
+		var shipId = 1;
+		$('#shipType').change(function() {
+			shipId = this.value;
+		});
+	});
+</script>
 
 </body>
 </html>
