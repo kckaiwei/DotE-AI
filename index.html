@@ -1,348 +1,171 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Aturi Cluster - AI</title>
-		<link rel="stylesheet" href="xwing-miniatures.css" />
-		<style>
-			.leftDiv {
-				float: left;
-				padding: 10px;
-			}
-			.red {
-				color: #FF0000;
-			}
-			.clrFlt {
-				clear: both;
-			}
-		</style>
-		<script type="text/javascript">
+<head>
+	<title>Page Title</title>
 
-			var canvas, ctx;
-			var buttonCoordinates = [];
-			var aiShip;
-			var tFighter = {}, tInt = {}, tAdv = {}, tPhan = {}, tBomber = {}, tDef = {}, vtDec = {}, lambda = {};
-			var imageObj = new Image();
-			var imageSources = {
-				tFighter: 'images/tFighter.jpg',
-				tInt: 'images/tInt.jpg',
-				tAdv: 'images/tAdv.jpg',
-				tPhan: 'images/tPhan.jpg',
-				tBomb: 'images/tBomb.jpg',
-				tDef: 'images/tDef.jpg',
-				vtDec: 'images/vtDec.jpg',
-				lambda: 'images/lambda.jpg'
-			};
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="xwing-miniatures.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<style>
+		.center {
+		    text-align: center;
+		}
+		.red {
+			color: #FF0000;
+		}
+	</style>
+</head>
+<body>
 
-			function loadImages(sources, callback) {
-				var images = {};
-				var loadedImages = 0;
-				var numImages = 0;
-				for (var src in sources) {
-					numImages++;
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Maneuver Tool</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<form>
+		<div class="ui-field-contain">
+		    <select id="shipType" name="select-native-2" id="select-native-2" data-mini="true">
+		        <option value="1">TIE Fighter</option>
+		        <option value="2">TIE Interceptor</option>
+		        <option value="3">TIE Advanced</option>
+		        <option value="4">TIE Defender</option>
+				<option value="5">TIE Phantom</option>
+				<option value="6">TIE Bomber</option>
+				<option value="7">VT-49 Decimator</option>
+				<option value="8">Lambda Shuttle</option>
+		    </select>
+		</div>
+		</form>
+		<div class="ui-grid-a">
+		    <div class="ui-block-a" style="width:55%;">
+				<div class="ui-grid-d center">
+				    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u-l ui-btn-icon-notext ui-btn-inline move" id="ul">Button</a></div>
+				    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext ui-btn-inline move" id="u">Button</a></div>
+				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u-r ui-btn-icon-notext ui-btn-inline move" id="ur">Button</a></div>
+					<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline move" id="l">Button</a></div>
+				    <div class="ui-block-b"><!-- <a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext ui-btn-inline">Button</a> --></div>
+				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-notext ui-btn-inline move" id="r">Button</a></div>
+					<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d-l ui-btn-icon-notext ui-btn-inline move" id="dl">Button</a></div>
+				    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d ui-btn-icon-notext ui-btn-inline move" id="d">Button</a></div>
+				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d-r ui-btn-icon-notext ui-btn-inline move" id="dr">Button</a></div>
+				</div>
+			</div>
+		    <div class="ui-block-b" style="width:45%;">
+				<div class="ui-bar ui-bar-a" id="maneuver">
+					<h3 class="ui-bar ui-bar-a">Range 1/2</h3>
+					<div class="ui-body" id="close"></div>
+					<h3 class="ui-bar ui-bar-a">Range 2/3</h3>
+					<div class="ui-bar" id="far"></div>
+				</div>
+			</div>
+		</div><!-- /grid-a -->
+		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Created by frbfli</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<script>
+	$(document).ready(function() {
+		var shipId;
+		var tFighter = {}, tInt = {}, tAdv = {}, tPhan = {}, tBomber = {}, tDef = {}, vtDec = {}, lambda = {};
+
+		$('#shipType').change(function() {
+			shipId = this.value;
+			switch(shipId) {
+				case '1':
+					shipId = tFighter;
+					break;
+				case '2':
+					shipId = tInt;
+					break;
+				case '3':
+					shipId = tAdv;
+					break;
+				case '4':
+					shipId = tDef;
+					break;
+				case '5':
+					shipId = tPhan;
+					break;
+				case '6':
+					shipId = tBomber;
+					break;
+				case '7':
+					shipId = vtDec;
+					break;
+				case '8':
+					shipId = lambda;
+					break;				
+			}
+		});
+		$('.move').click(function() {
+			moves = generateMoves(this.id);
+		});
+
+		var generateMoves = function(id) {
+			$('#close').removeClass('red');
+			$('#far').removeClass('red');
+			var close, far;
+			switch(id) {
+				case 'ul':
+					close = 'ITL';
+					far = 'OTL';
+					break;
+				case 'u':
+					close = 'IT';
+					far = 'OT';
+					break;
+				case 'ur':
+					close = 'ITR';
+					far = 'OTR';
+					break;
+				case 'l':
+					close = 'IL';
+					far = 'OL';
+					break;
+				case 'r':
+					close = 'IR';
+					far = 'OR';
+					break;
+				case 'dl':
+					close = 'IBR';
+					far = 'OBL';
+					break;
+				case 'd':
+					close = 'IB';
+					far = 'OB';
+					break;
+				case 'dr':
+					close = 'IBR';
+					far = 'OBR';
+					break;
+			}
+			var textClose = shipId[close][randomize()];
+			var textFar = shipId[far][randomize()];
+			$('#close').html(returnIcon(textClose));
+			$('#far').html(returnIcon(textFar));
+			for (r in shipId.RED) {
+				if (textClose == shipId.RED[r]) {
+					$('#close').addClass('red');
 				}
-				for (var src in sources) {
-					images[src] = new Image();
-					images[src].src = sources[src];
+				if (textFar == shipId.RED[r]) {
+					$('#far').addClass('red');
 				}
-			}
+			}			
+		}
 
-			function draw() {
-				canvas = document.getElementById("canvas");
-				ctx = canvas.getContext("2d");
-
-				loadImages(imageSources);
-
-				canvas.addEventListener("click", getPosition, false);
-
-				//Fill Background
-				ctx.fillStyle = "#A1D490";
-				ctx.fillRect(0,0,600,600);
-
-				//Create Circle
-				ctx.beginPath();
-				ctx.arc(300,300,200,0,360, false);
-				ctx.fillStyle = "#D4A190";
-				ctx.stroke();
-				ctx.fill();
-
-				//Front Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(165,0);
-				ctx.lineTo(435,0);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Back Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(435,600);
-				ctx.lineTo(165,600);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Front Right Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(435,0);
-				ctx.lineTo(600,0);
-				ctx.lineTo(600,165);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Front Left Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(165,0);
-				ctx.lineTo(0,0);
-				ctx.lineTo(0,165);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Right Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(600,165);
-				ctx.lineTo(600,435);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Left Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(0,165);
-				ctx.lineTo(0,435);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Back Right Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(600,435);
-				ctx.lineTo(600,600);
-				ctx.lineTo(435,600);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Back Right Arc
-				ctx.beginPath();
-				ctx.moveTo(300,300);
-				ctx.lineTo(0,435);
-				ctx.lineTo(0,600);
-				ctx.lineTo(165,600);
-				ctx.lineTo(300,300);
-				ctx.strokeStyle = "black";
-				ctx.stroke();
-
-				//Create Ship
-				ctx.fillStyle = "white";
-				ctx.fillRect(250,250,100,100);
-				ctx.strokeStyle = "black";
-				ctx.strokeRect(250,250,100,100);
-
-				createButtons();
-				createMoves();
-
-				document.getElementById('shipType').onchange = function() {
-					setShip(this.value);
-				}
-
-			}		
-
-			function getPosition(event) {
-
-				var x = event.x;
-				var y = event.y;
-
-				x -= canvas.offsetLeft;
-				y -= canvas.offsetTop;
-
-				for (b in buttonCoordinates) {
-					if (x >= buttonCoordinates[b].x1 && y >= buttonCoordinates[b].y1 && x <= buttonCoordinates[b].x2 && y <= buttonCoordinates[b].y2) {
-						pickMove(buttonCoordinates[b].id);
-					}
-				}
-			}
-
-			function drawShip() {
-				ctx.fillStyle = "white";
-				ctx.fillRect(250,250,100,100);
-				ctx.strokeStyle = "black";
-				ctx.strokeRect(250,250,100,100);
-				imageObj.src = aiShip.IMG;
-				ctx.drawImage(imageObj, 250, 250);
-			}
-
-			function createMoves() {
-				tFighter.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-				tFighter.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-				tFighter.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tFighter.OL = ['3BL', '3TL', '2BL', '2TL', '2TL', '1TL'];
-				tFighter.OR = ['3BR', '3TR', '2BR', '2TR', '2TR', '1TR'];
-				tFighter.OBL = ['4K', '3K', '3K', '2TL', '2TL', '1TL'];
-				tFighter.OBR = ['4K', '3K', '3K', '2TR', '2TR', '1TR'];
-				tFighter.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
-				tFighter.ITL = ['2F', '2BL', '2BL', '4K', '4K', '1TL'];
-				tFighter.ITR = ['2F', '2BR', '2BR', '4K', '4K', '1TR'];
-				tFighter.IT = ['2BL', '2BR', '2F', '2F', '4K', '4K'];
-				tFighter.IL = ['1TL', '1TL', '2TL', '2TL', '3K', '4K'];
-				tFighter.IR = ['1TR', '1TR', '2TR', '2TR', '3K', '4K'];
-				tFighter.IBL = ['1TL', '1TL', '2TL', '2TL', '3K', '4K'];
-				tFighter.IBR = ['1TR', '1TR', '2TR', '2TR', '3K', '4K'];
-				tFighter.IB = ['4K', '3K', '3K', '3TL', '3TR', '5F'];
-				tFighter.RED = ['4K', '3K'];
-				tFighter.IMG = imageSources.tFighter; 
-
-				tInt.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-				tInt.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-				tInt.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tInt.OL = ['3BL', '3TL', '2BL', '2TL', '2TL', '1TL'];
-				tInt.OR = ['3BR', '3TR', '2BR', '2TR', '2TR', '1TR'];
-				tInt.OBL = ['5K', '3K', '3K', '2TL', '2TL', '1TL'];
-				tInt.OBR = ['5K', '3K', '3K', '2TR', '2TR', '1TR'];
-				tInt.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
-				tInt.ITL = ['2F', '2BL', '2BL', '5K', '5K', '1TL'];
-				tInt.ITR = ['2F', '2BR', '2BR', '5K', '5K', '1TR'];
-				tInt.IT = ['2BL', '2BR', '2F', '2F', '5K', '5K'];
-				tInt.IL = ['1TL', '1TL', '2TL', '2TL', '3K', '5K'];
-				tInt.IR = ['1TR', '1TR', '2TR', '2TR', '3K', '5K'];
-				tInt.IBL = ['1TL', '1TL', '2TL', '3K', '5K', '5K'];
-				tInt.IBR = ['1TR', '1TR', '2TR', '3K', '5K', '5K'];
-				tInt.IB = ['5K', '3K', '3K', '3TL', '3TR', '5F'];
-				tInt.RED = ['5K', '3K'];
-				tInt.IMG = imageSources.tInt; 
-
-				tAdv.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-				tAdv.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-				tAdv.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tAdv.OL = ['1BL', '2BL', '2TL', '2TL', '3TL', '3TL'];
-				tAdv.OR = ['1BR', '2BR', '2TR', '2TR', '3TR', '3TR'];
-				tAdv.OBL = ['4K', '4K', '4K', '2TL', '2TL', '2TL'];
-				tAdv.OBR = ['4K', '4K', '4K', '2TR', '2TR', '2TR'];
-				tAdv.OB = ['4K', '4K', '4K', '4K', '2TL', '2TR'];
-				tAdv.ITL = ['2F', '1BL', '1BL', '1BL', '4K', '4K'];
-				tAdv.ITR = ['2F', '1BR', '1BR', '1BR', '4K', '4K'];
-				tAdv.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
-				tAdv.IL = ['1BL', '4K', '4K', '2TL', '2TL', '2TL'];
-				tAdv.IR = ['1BR', '4K', '4K', '2TR', '2TR', '2TR'];
-				tAdv.IBL = ['4K', '4K', '4K', '2TL', '2TL', '1BL'];
-				tAdv.IBR = ['4K', '4K', '4K', '2TR', '2TR', '1BR'];
-				tAdv.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
-				tAdv.RED = ['4K'];
-				tAdv.IMG = imageSources.tAdv; 
-
-				tPhan.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-				tPhan.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-				tPhan.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-				tPhan.OL = ['1TL', '1TL', '2TL', '2TL', '3TL', '2BL'];
-				tPhan.OR = ['1TR', '1TR', '2TR', '2TR', '3TR', '2BR'];
-				tPhan.OBL = ['4K', '3K', '3K', '2TL', '2TL', '1TL'];
-				tPhan.OBR = ['4K', '3K', '3K', '2TR', '2TR', '1TR'];
-				tPhan.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
-				tPhan.ITL = ['2F', '2BL', '4K', '4K', '1TL', '1TL'];
-				tPhan.ITR = ['2F', '2BR', '4K', '4K', '1TR', '1TR'];
-				tPhan.IT = ['2BL', '2BR', '2F', '4K', '4K', '4K'];
-				tPhan.IL = ['1TL', '1TL', '1TL', '2TL', '2TL', '4K'];
-				tPhan.IR = ['1TR', '1TR', '1TR', '2TR', '2TR', '4K'];
-				tPhan.IBL = ['1TL', '1TL', '2TL', '3K', '4K', '4K'];
-				tPhan.IBR = ['1TR', '1TR', '2TR', '3K', '4K', '4K'];
-				tPhan.IB = ['4K', '3K', '3K', '3TL', '3TR', '4F'];
-				tPhan.RED = ['4K', '3K'];
-				tPhan.IMG = imageSources.tPhan; 
-
-				tBomber.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-				tBomber.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-				tBomber.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-				tBomber.OL = ['3BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
-				tBomber.OR = ['3BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
-				tBomber.OBL = ['5K', '5K', '2TL', '2TL', '3TL', '3TL'];
-				tBomber.OBR = ['5K', '5K', '2TR', '2TR', '3TR', '3TR'];
-				tBomber.OB = ['5K', '5K', '5K', '5K', '2TL', '2TR'];
-				tBomber.ITL = ['3TL', '1F', '1BL', '1BL', '1BL', '5K'];
-				tBomber.ITR = ['3TR', '1F', '1BR', '1BR', '1BR', '5K'];
-				tBomber.IT = ['1BL', '1BR', '1F', '1F', '1F', '5K'];
-				tBomber.IL = ['1BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
-				tBomber.IR = ['1BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
-				tBomber.IBL = ['5K', '5K', '5K', '3TL', '3TL', '2TL'];
-				tBomber.IBR = ['5K', '5K', '5K', '3TR', '3TR', '2TR'];
-				tBomber.IB = ['5K', '5K', '5K', '5K', '3TL', '3TR'];
-				tBomber.RED = ['5K', '2T', '2TL', '2TR'];
-				tBomber.IMG = imageSources.tBomb; 
-
-				tDef.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-				tDef.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-				tDef.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-				tDef.OL = ['1BL', '2BL', '2TL', '3TL', '3TL', '3TL'];
-				tDef.OR = ['1BR', '2BR', '2TR', '3TR', '3TR', '3TR'];
-				tDef.OBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
-				tDef.OBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
-				tDef.OB = ['4K', '4K', '4K', '4K', '1TL', '1TR'];
-				tDef.ITL = ['2F', '1BL', '1BL', '4K', '4K', '1TL'];
-				tDef.ITR = ['2F', '1BR', '1BR', '4K', '4K', '1TR'];
-				tDef.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
-				tDef.IL = ['1BL', '4K', '4K', '2TL', '1TL', '1TL'];
-				tDef.IR = ['1BR', '4K', '4K', '2TR', '1TR', '1TR'];
-				tDef.IBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
-				tDef.IBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
-				tDef.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
-				tDef.RED = ['1T', '2TL', '2TR', '1TL', '1TR'];
-				tDef.IMG = imageSources.tDef; 
-
-				vtDec.OTL = ['4F', '3BL', '3BL', '3BL', '2BL', '3TL'];
-				vtDec.OTR = ['4F', '3BR', '3BR', '3BR', '2BR', '3TR'];
-				vtDec.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-				vtDec.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '1BL'];
-				vtDec.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '1BR'];
-				vtDec.OBL = ['2TL', '2TL', '2TL', '3TL', '3TL', '1BL'];
-				vtDec.OBR = ['2TR', '2TR', '2TR', '3TR', '3TR', '1BR'];
-				vtDec.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
-				vtDec.ITL = ['3BL', '3BL', '2BL', '2TL', '4F', '4F'];
-				vtDec.ITR = ['3BR', '3BR', '2BR', '2TR', '4F', '4F'];
-				vtDec.IT = ['4F', '4F', '3BL', '3BR', '3TL', '3TR'];
-				vtDec.IL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
-				vtDec.IR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
-				vtDec.IBL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
-				vtDec.IBR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
-				vtDec.IB = ['3TL', '2TL', '1B', '3TR', '2TR', '1BR'];
-				vtDec.RED = [];
-				vtDec.IMG = imageSources.vtDec; 
-
-				lambda.OTL = ['2F', '3BL', '2BL', '2BL', '2BL', '2TL'];
-				lambda.OTR = ['2F', '3BR', '2BR', '2BR', '2BR', '2TR'];
-				lambda.OT = ['3F', '3F', '3F', '2TL', '2TR', '1F'];
-				lambda.OL = ['2TL', '2TL', '2TL', '2TL', '2BL', '3BL'];
-				lambda.OR = ['2TR', '2TR', '2TR', '2TR', '2BR', '3BR'];
-				lambda.OBL = ['2TL', '2TL', '2TL', '2TL', '1BL', '1BL'];
-				lambda.OBR = ['2TR', '2TR', '2TR', '2TR', '1BR', '1BR'];
-				lambda.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
-				lambda.ITL = ['0S', '1F', '1BL', '1BL', '1BL', '2TL'];
-				lambda.ITR = ['0S', '1F', '1BR', '1BR', '1BR', '2TR'];
-				lambda.IT = ['0S', '0S', '0S', '1F', '1BR', '1BL'];
-				lambda.IL = ['0S', '2TL', '2TL', '2TL', '1BL', '2BL'];
-				lambda.IR = ['0S', '2TR', '2TR', '2TR', '1BR', '2BR'];
-				lambda.IBL = ['0S', '2TL', '2TL', '2TL', '2BL', '3BL'];
-				lambda.IBR = ['0S', '2TR', '2TR', '2TR', '2BR', '3BR'];
-				lambda.IB = ['0S', '0S', '2TR', '2TL', '3BR', '3BL'];
-				lambda.RED = ['0S', '2T', '2TL', '2TR', '3B', '3BL', '3BR'];
-				lambda.IMG = imageSources.lambda; 
-			}
-
-			function setMove(move) {
-				var string = '';
-				switch(move) {
+		var returnIcon = function(move) {
+			var string = '';
+			switch(move) {
 					case '0S':
 						string = "0 <i class='xwing-miniatures-font xwing-miniatures-font-stop'></i>";
-						break;
-					case '1T':
-						string = "1 Hard Turn";
 						break;
 					case '1TL':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
@@ -350,17 +173,11 @@
 					case '1TR':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
 						break;
-					case '2T':
-						string = "2 Hard Turn";
-						break;
 					case '2TL':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
 						break;
 					case '2TR':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
-						break;
-					case '3T':
-						string = "3 Hard Turn";
 						break;
 					case '3TL':
 						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-turnleft'></i>";
@@ -368,26 +185,17 @@
 					case '3TR':
 						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-turnright'></i>";
 						break;
-					case '1B':
-						string = "1 Bank";
-						break;
 					case '1BL':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
 						break;
 					case '1BR':
 						string = "1 <i class='xwing-miniatures-font xwing-miniatures-font-bankright'></i>";
 						break;
-					case '2B':
-						string = "2 Bank";
-						break;
 					case '2BL':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
 						break;
 					case '2BR':
 						string = "2 <i class='xwing-miniatures-font xwing-miniatures-font-bankright'></i>";
-						break;
-					case '3B':
-						string = "3 Bank";
 						break;
 					case '3BL':
 						string = "3 <i class='xwing-miniatures-font xwing-miniatures-font-bankleft'></i>";
@@ -426,185 +234,165 @@
 						string = "5 <i class='xwing-miniatures-font xwing-miniatures-font-kturn'></i>";
 						break;
 				}
-				return string;
-			}
+			return string;
+		}
 
+		var randomize = function() {
+			return Math.floor(Math.random() * (5 - 0 + 1)) + 0;
+		}
 
-			function pickMove(id) {
-				var shipMove;
-				var n = generate();
-				document.getElementById('move').className = "";
-				switch (id) {
-					case 'OTL':
-						shipMove = aiShip.OTL[(n-1)];
-						break;
-					case 'OT':
-						shipMove = aiShip.OT[(n-1)];
-						break;
-					case 'OTR':
-						shipMove = aiShip.OTR[(n-1)];
-						break;
-					case 'OL':
-						shipMove = aiShip.OL[(n-1)];
-						break;
-					case 'OR':
-						shipMove = aiShip.OR[(n-1)];
-						break;
-					case 'OBL':
-						shipMove = aiShip.OBL[(n-1)];
-						break;
-					case 'OB':
-						shipMove = aiShip.OB[(n-1)];
-						break;
-					case 'OBR':
-						shipMove = aiShip.OBR[(n-1)];
-						break;
-					case 'ITL':
-						shipMove = aiShip.ITL[(n-1)];
-						break;
-					case 'IT':
-						shipMove = aiShip.IT[(n-1)];
-						break;
-					case 'ITR':
-						shipMove = aiShip.ITR[(n-1)];
-						break;
-					case 'IL':
-						shipMove = aiShip.IL[(n-1)];
-						break;
-					case 'IR':
-						shipMove = aiShip.IR[(n-1)];
-						break;
-					case 'IBL':
-						shipMove = aiShip.IBL[(n-1)];
-						break;
-					case 'IB':
-						shipMove = aiShip.IB[(n-1)];
-						break;
-					case 'IBR':
-						shipMove = aiShip.IBR[(n-1)];
-						break;
-					default:
-						break;
-				}
-				for (r in aiShip.RED) {
-					if (shipMove == aiShip.RED[r]) {
-						document.getElementById('move').classList.add('red');
-					}
-				}
-				document.getElementById('move').innerHTML = setMove(shipMove);
-			}
+		var createMoves = function() {
+			tFighter.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			tFighter.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			tFighter.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+			tFighter.OL = ['3BL', '3TL', '2BL', '2TL', '2TL', '1TL'];
+			tFighter.OR = ['3BR', '3TR', '2BR', '2TR', '2TR', '1TR'];
+			tFighter.OBL = ['4K', '3K', '3K', '2TL', '2TL', '1TL'];
+			tFighter.OBR = ['4K', '3K', '3K', '2TR', '2TR', '1TR'];
+			tFighter.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
+			tFighter.ITL = ['2F', '2BL', '2BL', '4K', '4K', '1TL'];
+			tFighter.ITR = ['2F', '2BR', '2BR', '4K', '4K', '1TR'];
+			tFighter.IT = ['2BL', '2BR', '2F', '2F', '4K', '4K'];
+			tFighter.IL = ['1TL', '1TL', '2TL', '2TL', '3K', '4K'];
+			tFighter.IR = ['1TR', '1TR', '2TR', '2TR', '3K', '4K'];
+			tFighter.IBL = ['1TL', '1TL', '2TL', '2TL', '3K', '4K'];
+			tFighter.IBR = ['1TR', '1TR', '2TR', '2TR', '3K', '4K'];
+			tFighter.IB = ['4K', '3K', '3K', '3TL', '3TR', '5F'];
+			tFighter.RED = ['4K', '3K'];
 
-			function generate() {
-				var num = Math.floor(Math.random() * (7 - 1)) + 1;
-				return num;
-			}
+			tInt.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			tInt.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			tInt.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+			tInt.OL = ['3BL', '3TL', '2BL', '2TL', '2TL', '1TL'];
+			tInt.OR = ['3BR', '3TR', '2BR', '2TR', '2TR', '1TR'];
+			tInt.OBL = ['5K', '3K', '3K', '2TL', '2TL', '1TL'];
+			tInt.OBR = ['5K', '3K', '3K', '2TR', '2TR', '1TR'];
+			tInt.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
+			tInt.ITL = ['2F', '2BL', '2BL', '5K', '5K', '1TL'];
+			tInt.ITR = ['2F', '2BR', '2BR', '5K', '5K', '1TR'];
+			tInt.IT = ['2BL', '2BR', '2F', '2F', '5K', '5K'];
+			tInt.IL = ['1TL', '1TL', '2TL', '2TL', '3K', '5K'];
+			tInt.IR = ['1TR', '1TR', '2TR', '2TR', '3K', '5K'];
+			tInt.IBL = ['1TL', '1TL', '2TL', '3K', '5K', '5K'];
+			tInt.IBR = ['1TR', '1TR', '2TR', '3K', '5K', '5K'];
+			tInt.IB = ['5K', '3K', '3K', '3TL', '3TR', '5F'];
+			tInt.RED = ['5K', '3K'];
 
-			function pointInCircle(x, y, cx, cy, radius) {
-				var distanceSquared = (x - cx) * (x - cx) + (y - cy) * (y - cy);
-				return distanceSquared <= (radius * radius);
-			}
+			tAdv.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			tAdv.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			tAdv.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+			tAdv.OL = ['1BL', '2BL', '2TL', '2TL', '3TL', '3TL'];
+			tAdv.OR = ['1BR', '2BR', '2TR', '2TR', '3TR', '3TR'];
+			tAdv.OBL = ['4K', '4K', '4K', '2TL', '2TL', '2TL'];
+			tAdv.OBR = ['4K', '4K', '4K', '2TR', '2TR', '2TR'];
+			tAdv.OB = ['4K', '4K', '4K', '4K', '2TL', '2TR'];
+			tAdv.ITL = ['2F', '1BL', '1BL', '1BL', '4K', '4K'];
+			tAdv.ITR = ['2F', '1BR', '1BR', '1BR', '4K', '4K'];
+			tAdv.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
+			tAdv.IL = ['1BL', '4K', '4K', '2TL', '2TL', '2TL'];
+			tAdv.IR = ['1BR', '4K', '4K', '2TR', '2TR', '2TR'];
+			tAdv.IBL = ['4K', '4K', '4K', '2TL', '2TL', '1BL'];
+			tAdv.IBR = ['4K', '4K', '4K', '2TR', '2TR', '1BR'];
+			tAdv.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
+			tAdv.RED = ['4K'];
 
-			function createButtons() {
-				buttonCoordinates.push(new Button(50,50,'OTL'));
-				buttonCoordinates.push(new Button(275,25,'OT'));
-				buttonCoordinates.push(new Button(500,50,'OTR'));
-				buttonCoordinates.push(new Button(25,275,'OL'));
-				buttonCoordinates.push(new Button(525,275,'OR'));
-				buttonCoordinates.push(new Button(50,475,'OBL'));
-				buttonCoordinates.push(new Button(275,525,'OB'));
-				buttonCoordinates.push(new Button(500,475,'OBR'));
+			tPhan.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			tPhan.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			tPhan.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
+			tPhan.OL = ['1TL', '1TL', '2TL', '2TL', '3TL', '2BL'];
+			tPhan.OR = ['1TR', '1TR', '2TR', '2TR', '3TR', '2BR'];
+			tPhan.OBL = ['4K', '3K', '3K', '2TL', '2TL', '1TL'];
+			tPhan.OBR = ['4K', '3K', '3K', '2TR', '2TR', '1TR'];
+			tPhan.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
+			tPhan.ITL = ['2F', '2BL', '4K', '4K', '1TL', '1TL'];
+			tPhan.ITR = ['2F', '2BR', '4K', '4K', '1TR', '1TR'];
+			tPhan.IT = ['2BL', '2BR', '2F', '4K', '4K', '4K'];
+			tPhan.IL = ['1TL', '1TL', '1TL', '2TL', '2TL', '4K'];
+			tPhan.IR = ['1TR', '1TR', '1TR', '2TR', '2TR', '4K'];
+			tPhan.IBL = ['1TL', '1TL', '2TL', '3K', '4K', '4K'];
+			tPhan.IBR = ['1TR', '1TR', '2TR', '3K', '4K', '4K'];
+			tPhan.IB = ['4K', '3K', '3K', '3TL', '3TR', '4F'];
+			tPhan.RED = ['4K', '3K'];
 
-				buttonCoordinates.push(new Button(175,175,'ITL'));
-				buttonCoordinates.push(new Button(275,150,'IT'));
-				buttonCoordinates.push(new Button(375,175,'ITR'));
-				buttonCoordinates.push(new Button(150,275,'IL'));
-				buttonCoordinates.push(new Button(400,275,'IR'));
-				buttonCoordinates.push(new Button(175,375,'IBL'));
-				buttonCoordinates.push(new Button(275,400,'IB'));
-				buttonCoordinates.push(new Button(375,375,'IBR'));
+			tBomber.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			tBomber.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			tBomber.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
+			tBomber.OL = ['3BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
+			tBomber.OR = ['3BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
+			tBomber.OBL = ['5K', '5K', '2TL', '2TL', '3TL', '3TL'];
+			tBomber.OBR = ['5K', '5K', '2TR', '2TR', '3TR', '3TR'];
+			tBomber.OB = ['5K', '5K', '5K', '5K', '2TL', '2TR'];
+			tBomber.ITL = ['3TL', '1F', '1BL', '1BL', '1BL', '5K'];
+			tBomber.ITR = ['3TR', '1F', '1BR', '1BR', '1BR', '5K'];
+			tBomber.IT = ['1BL', '1BR', '1F', '1F', '1F', '5K'];
+			tBomber.IL = ['1BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
+			tBomber.IR = ['1BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
+			tBomber.IBL = ['5K', '5K', '5K', '3TL', '3TL', '2TL'];
+			tBomber.IBR = ['5K', '5K', '5K', '3TR', '3TR', '2TR'];
+			tBomber.IB = ['5K', '5K', '5K', '5K', '3TL', '3TR'];
+			tBomber.RED = ['5K', '2T', '2TL', '2TR'];
 
-				for (b in buttonCoordinates) {
-					ctx.fillRect(buttonCoordinates[b].x1, buttonCoordinates[b].y1,50,50);
-				}
-			}
+			tDef.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			tDef.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			tDef.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+			tDef.OL = ['1BL', '2BL', '2TL', '3TL', '3TL', '3TL'];
+			tDef.OR = ['1BR', '2BR', '2TR', '3TR', '3TR', '3TR'];
+			tDef.OBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
+			tDef.OBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
+			tDef.OB = ['4K', '4K', '4K', '4K', '1TL', '1TR'];
+			tDef.ITL = ['2F', '1BL', '1BL', '4K', '4K', '1TL'];
+			tDef.ITR = ['2F', '1BR', '1BR', '4K', '4K', '1TR'];
+			tDef.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
+			tDef.IL = ['1BL', '4K', '4K', '2TL', '1TL', '1TL'];
+			tDef.IR = ['1BR', '4K', '4K', '2TR', '1TR', '1TR'];
+			tDef.IBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
+			tDef.IBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
+			tDef.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
+			tDef.RED = ['1T', '2TL', '2TR', '1TL', '1TR'];
 
-			function setShip(val) {
-				switch(val) {
-					case 'tFighter':
-						aiShip = tFighter;
-						break;
-					case 'tInt':
-						aiShip = tInt;
-						break;
-					case 'tAdv':
-						aiShip = tAdv;
-						break;
-					case 'tPhan':
-						aiShip = tPhan;
-						break;
-					case 'tBomber':
-						aiShip = tBomber;
-						break;
-					case 'tDef':
-						aiShip = tDef;
-						break;
-					case 'vtDec':
-						aiShip = vtDec;
-						break;
-					case 'lambda':
-						aiShip = lambda;
-						break;
-					default:
-						break;
-				}
-				drawShip();
-			}
+			vtDec.OTL = ['4F', '3BL', '3BL', '3BL', '2BL', '3TL'];
+			vtDec.OTR = ['4F', '3BR', '3BR', '3BR', '2BR', '3TR'];
+			vtDec.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
+			vtDec.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '1BL'];
+			vtDec.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '1BR'];
+			vtDec.OBL = ['2TL', '2TL', '2TL', '3TL', '3TL', '1BL'];
+			vtDec.OBR = ['2TR', '2TR', '2TR', '3TR', '3TR', '1BR'];
+			vtDec.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
+			vtDec.ITL = ['3BL', '3BL', '2BL', '2TL', '4F', '4F'];
+			vtDec.ITR = ['3BR', '3BR', '2BR', '2TR', '4F', '4F'];
+			vtDec.IT = ['4F', '4F', '3BL', '3BR', '3TL', '3TR'];
+			vtDec.IL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
+			vtDec.IR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
+			vtDec.IBL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
+			vtDec.IBR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
+			vtDec.IB = ['3TL', '2TL', '1B', '3TR', '2TR', '1BR'];
+			vtDec.RED = [];
 
-			function Button(x,y,id) {
-				this.x1 = x;
-				this.y1 = y;
-				this.x2 = x + 50;
-				this.y2 = y + 50;
-				this.id = id;
-			}
+			lambda.OTL = ['2F', '3BL', '2BL', '2BL', '2BL', '2TL'];
+			lambda.OTR = ['2F', '3BR', '2BR', '2BR', '2BR', '2TR'];
+			lambda.OT = ['3F', '3F', '3F', '2TL', '2TR', '1F'];
+			lambda.OL = ['2TL', '2TL', '2TL', '2TL', '2BL', '3BL'];
+			lambda.OR = ['2TR', '2TR', '2TR', '2TR', '2BR', '3BR'];
+			lambda.OBL = ['2TL', '2TL', '2TL', '2TL', '1BL', '1BL'];
+			lambda.OBR = ['2TR', '2TR', '2TR', '2TR', '1BR', '1BR'];
+			lambda.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
+			lambda.ITL = ['0S', '1F', '1BL', '1BL', '1BL', '2TL'];
+			lambda.ITR = ['0S', '1F', '1BR', '1BR', '1BR', '2TR'];
+			lambda.IT = ['0S', '0S', '0S', '1F', '1BR', '1BL'];
+			lambda.IL = ['0S', '2TL', '2TL', '2TL', '1BL', '2BL'];
+			lambda.IR = ['0S', '2TR', '2TR', '2TR', '1BR', '2BR'];
+			lambda.IBL = ['0S', '2TL', '2TL', '2TL', '2BL', '3BL'];
+			lambda.IBR = ['0S', '2TR', '2TR', '2TR', '2BR', '3BR'];
+			lambda.IB = ['0S', '0S', '2TR', '2TL', '3BR', '3BL'];
+			lambda.RED = ['0S', '2T', '2TL', '2TR', '3B', '3BL', '3BR'];
 
-		</script>
-		<style type="text/css">
-			canvas { 
-				border: 1px solid black;
-			}
-		</style>
-	</head>
-	<body onload="draw();">
-	<div>
-		<div>
-			<div class="leftDiv">
-				<canvas id="canvas" width="600" height="600"></canvas>
-			</div>
-			
-				<div class="leftDiv">
-					<div>
-						<select id="shipType">
-							<option value="none">Select a Ship</option>
-							<option value="tFighter">TIE Fighter</option>
-							<option value="tInt">TIE Interceptor</option>
-							<option value="tAdv">TIE Advanced</option>
-							<option value="tPhan">TIE Phantom</option>
-							<option value="tBomber">TIE Bomber</option>
-							<option value="tDef">TIE Defender</option>
-							<option value="vtDec">VT-49 Decimator</option>
-							<option value="lambda">Lambda Shuttle</option>
-						</select>
-					</div>
-					<div>
-						<h2>Maneuver</h2>
-						<span id="move" style="font-size: xx-large;"></span>
-					</div>
-				</div>
-		</div>
-		<div class="clrFlt">
-			<span style="font-size: xx-small;">X-Wing Symbols: <a href="https://github.com/Hinny">Hinny</a> and <a href="https://github.com/armoredgear7">Josh Derksen</a><br />AI Logic: <a href="http://dockingbay416.com/campaign/">Heroes of the Aturi Cluster Campaign</a></span>
-		</div>
-	</div>
-	</body>
+			shipId = tFighter;
+		}
+
+		createMoves();
+
+	});
+</script>
+
+</body>
 </html>
