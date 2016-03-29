@@ -43,19 +43,19 @@
 		<div class="ui-grid-a">
 		    <div class="ui-block-a">
 				<div class="ui-grid-d center">
-				    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u-l ui-btn-icon-notext ui-btn-inline">Button</a></div>
-				    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext ui-btn-inline">Button</a></div>
-				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u-r ui-btn-icon-notext ui-btn-inline">Button</a></div>
-					<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline">Button</a></div>
+				    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u-l ui-btn-icon-notext ui-btn-inline" id="ul">Button</a></div>
+				    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext ui-btn-inline" id="u">Button</a></div>
+				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u-r ui-btn-icon-notext ui-btn-inline" id="ur">Button</a></div>
+					<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline" id="l">Button</a></div>
 				    <div class="ui-block-b"><!-- <a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext ui-btn-inline">Button</a> --></div>
-				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-notext ui-btn-inline">Button</a></div>
-					<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d-l ui-btn-icon-notext ui-btn-inline">Button</a></div>
-				    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d ui-btn-icon-notext ui-btn-inline">Button</a></div>
-				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d-r ui-btn-icon-notext ui-btn-inline">Button</a></div>
+				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-notext ui-btn-inline" id="r">Button</a></div>
+					<div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d-l ui-btn-icon-notext ui-btn-inline" id="dl">Button</a></div>
+				    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d ui-btn-icon-notext ui-btn-inline" id="d">Button</a></div>
+				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d-r ui-btn-icon-notext ui-btn-inline" id="dr">Button</a></div>
 				</div>
 			</div>
 		    <div class="ui-block-b">
-				<div class="ui-bar ui-bar-a" style="height:60px">More Info</div>
+				<div class="ui-bar ui-bar-a" id="maneuver"></div>
 			</div>
 		</div><!-- /grid-a -->
 		
@@ -71,6 +71,9 @@
 		var shipId = 1;
 		$('#shipType').change(function() {
 			shipId = this.value;
+		});
+		$('.ui-shadow').click(function() {
+			$('#maneuver').html(this.id);
 		});
 	});
 </script>
