@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="xwing-miniatures.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-	<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script> -->
+	<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<style>
 		.center {
@@ -37,7 +38,7 @@
 		</div>
 		</form>
 		<div class="ui-grid-a">
-		    <div class="ui-block-a" style="width:65%;">
+		    <div class="ui-block-a" style="width:80%;">
 				<div class="ui-grid-d center">
 				    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u-l ui-btn-icon-notext ui-btn-inline move" id="ul">Button</a></div>
 				    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext ui-btn-inline move" id="u">Button</a></div>
@@ -50,7 +51,7 @@
 				    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-d-r ui-btn-icon-notext ui-btn-inline move" id="dr">Button</a></div>
 				</div>
 			</div>
-		    <div class="ui-block-b" style="width:35%;">
+		    <div class="ui-block-b" style="width:20%;">
 				<div class="ui-bar ui-bar-a" id="maneuver">
 					<h3 class="ui-bar ui-bar-a">Range 1/2</h3>
 					<div class="ui-body" id="close"></div>
@@ -60,9 +61,14 @@
 			</div>
 		</div><!-- /grid-a -->
 
-		  <div id="shipSteps" class="ui-body">
+		<a href="#positionWindow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" data-position-to="window">Show Steps</a>
+		<div data-role="popup" id="positionWindow" class="ui-content" data-theme="a">
+			<div id="shipSteps" class="ui-body">
 				
 		  </div>
+		</div>
+
+		  
 	</div><!-- /content -->
 
 	<div data-role="footer">
@@ -390,7 +396,7 @@
 		}
 
 		var createSteps = function() {
-			tFighter.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc, and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> if you have a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-evade'></i></li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy</li></ol></li></ol>";
+			tFighter.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li></ol></li<li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc, and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> if you have a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-evade'></i></li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy</li></ol></li></ol>";
 
 			tInt.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> Action</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-boost'></i> or <i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-boost'></i> or <i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc, and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-evade'></i></li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy</li></ol></li></ol>";
 
@@ -415,6 +421,11 @@
 
 		shipId = tFighter;
 		$('#shipSteps').html(shipId.steps);
+
+		$('.ui-btn a').click(function(e) {
+			e.preventDefault();
+			return false;
+		});
 		
 		});
 </script>
