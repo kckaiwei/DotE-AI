@@ -32,7 +32,7 @@
 				<option value="4">Y-Wing (PS 4)</option>
 				<option value="5">B-Wing (PS 2)</option>
 				<option value="6">B-Wing (PS 4)</option>
-		        <option value="7">X-Wing</option>
+		        <option value="7">HWK-290</option>
 		        <option value="8">A-Wing</option>
 		        <option value="9">B-Wing</option>
 				<option value="10">E-Wing</option>
@@ -79,7 +79,7 @@
 <script>
 	$(document).ready(function() {
 		var shipId;
-		var z952 = {}, z954 = {}, yWing2 = {}, yWing4 = {}, bWing2 = {}, bWing4 = {}, xWing = {},  tAdv = {}, tPhan = {}, tBomber = {}, tDef = {}, vtDec = {}, lambda = {};
+		var z952 = {}, z954 = {}, yWing2 = {}, yWing4 = {}, bWing2 = {}, bWing4 = {}, hwk290 = {},  tAdv = {}, tPhan = {}, tBomber = {}, tDef = {}, vtDec = {}, lambda = {};
 
 		$('#shipType').change(function() {
 			shipId = this.value;
@@ -103,7 +103,7 @@
 					shipId = bWing4;
 					break;
 				case '7':
-					shipId = xWing;
+					shipId = hwk290;
 					break;
 				case '8':
 					shipId = tAdv;
@@ -373,6 +373,24 @@
 			bWing4.IB = ['2K', '2K', '2K', '3F', '1TL', '1TR'];
 			bWing4.RED = ['4F','2K','1TL','1TR','3BR','3BL'];
 
+			hwk290.OTL = ['4F', '3F', '2BL', '2BL', '2TL', '3BL'];
+			hwk290.OTR = ['4F', '3F', '2BR', '2BR', '2TR', '3BR'];
+			hwk290.OT = ['4F', '3F', '3F', '3F', '2F', '2F'];
+			hwk290.OL = ['3BL', '2BL', '2BL', '2TL', '2TL', '1BL'];
+			hwk290.OR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
+			hwk290.OBL = ['2TL', '2TL', '2TL', '2TL', '1BL', '1BL'];
+			hwk290.OBR = ['2TR', '2TR', '2TR', '2TR', '1BR', '1BR'];
+			hwk290.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
+			hwk290.ITL = ['4F', '3F', '3F', '2BL', '2TL', '2BR'];
+			hwk290.ITR = ['4F', '3F', '3F', '2BL', '2TR', '2BR'];
+			hwk290.IT = ['3F', '3F', '2BR', '2BL', '2TL', '2TR'];
+			hwk290.IL = ['3BL', '2BL', '2BL', '2TL', '1BL', '1BL'];
+			hwk290.IR = ['3BR', '2BR', '2BR', '2TR', '1BR', '1BR'];
+			hwk290.IBL = ['3BL', '2BL', '2BL', '2TL', '2TL', '1BL'];
+			hwk290.IBR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
+			hwk290.IB = ['2TL', '2TL', '2TR', '2TR', '1BL', '1BR'];
+			hwk290.RED = ['3BR','3BL','4F'];
+
 			xWing.OTL = ['4F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			xWing.OTR = ['4F', '2BR', '3BR', '3BR', '3BR', '3TR'];
 			xWing.OT = ['4F', '3F', '3F', '2F', '2F', '1F'];
@@ -493,6 +511,10 @@
 			yWing4.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> Action</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> enemy in arc at Range 2-3</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> nearest enemy in arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li><i class='xwing-miniatures-font xwing-miniatures-font-turret'></i> if possible </li><li>Enemy you have <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> on </li><li>Nearest Enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-turret'></i> <b>Twin Laser Turret </b></br>Range 2-3. 3 Atk. Perfom this attack twice. If this attack hits, cancel all dice results and deal 1 damage to the defender.</p><p><i class='xwing-miniatures-font xwing-miniatures-font-astromech'></i><b> R3 Astromech</b></br>When attacking, cancel 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> and assign 1 <i class='xwing-miniatures-font xwing-miniatures-font-evade'></i> to the ship. This should only be used if the ship does not have a <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> token.</p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></li></ol>";
 
 			bWing2.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> Action</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> enemy in arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get out of arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li><i class='xwing-miniatures-font xwing-miniatures-font-turret'></i> if possible </li><li>Enemy you have <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> on </li><li>Nearest Enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-cannon'></i> <b>Ion Cannon </b></br>Use at Range 2-3. 3 Atk. If this attack hits the defender suffers 1 <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i> and recieves 1 ion token. Turn 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> or blank into a <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i></p><p><i class='xwing-miniatures-font xwing-miniatures-font-system'></i><b> Accuracy Corrector</b></br>When attacking you may cancel your dice results and add 2 <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i></p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></li></ol>";
+
+			bWing4.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> Action</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> enemy in arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get out of arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> if possible </li><li>Nearest Enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> <b>Proton Torpedoes x2 & Guidance Chips </b></br>Spend <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> to fire. 4 Atk. Turn 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> or blank into a <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i> and 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> into a <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i>.</p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></li></ol>";
+
+			hwk290.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> Action</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> nearest enemy </li></ol></li><li><b>Attack Target</b><ol><li><i class='xwing-miniatures-font xwing-miniatures-font-turret'></i> if possible </li><li>Nearest Enemy in arc</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-turret'></i> <b>Dorsal Turret </b></br>Range 1-2. 2 Atk. At range 1, roll 1 extra attack die.</p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></li></ol>";
 
 			xWing.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc, and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> if you have a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-evade'></i></li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy</li></ol></li></ol>";
 
