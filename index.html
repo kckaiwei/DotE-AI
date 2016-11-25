@@ -37,8 +37,11 @@
 		        <option value="9">A-Wing (PS 3)</option>
 				<option value="10">X-Wing (PS 2)</option>
 				<option value="11">X-Wing (PS 4)</option>
-				<option value="12">K-Wing</option>
-				<option value="13">YT-1300 (3 ATK)</option>
+				<option value="12">E-Wing (PS 1)</option>
+				<option value="13">E-Wing (PS 3)</option>
+				<option value="14">K-Wing (PS 2)</option>
+				<option value="15">K-Wing (PS 4)</option>
+				<option value="16">YT-1300 (3 ATK)</option>
 		    </select>
 		</div>
 <!-- 		</form> -->
@@ -79,7 +82,7 @@
 <script>
 	$(document).ready(function() {
 		var shipId;
-		var z952 = {}, z954 = {}, yWing2 = {}, yWing4 = {}, bWing2 = {}, bWing4 = {}, hwk290 = {},  tAdv = {}, tPhan = {}, tBomber = {}, tDef = {}, vtDec = {}, yt1300 = {}; xWing2 = {}, xWing4 = {}, aWing1 = {}, aWing3 = {},
+		var z952 = {}, z954 = {}, yWing2 = {}, yWing4 = {}, bWing2 = {}, bWing4 = {}, hwk290 = {}, yt1300 = {}; xWing2 = {}, xWing4 = {}, aWing1 = {}, aWing3 = {}, eWing1 = {}, eWing3 = {}, kWing2 = {}, kWing4 = {},
 
 		$('#shipType').change(function() {
 			shipId = this.value;
@@ -118,9 +121,18 @@
 					shipId = xWing4;
 					break;
 				case '12':
-					shipId = vtDec;
+					shipId = eWing1;
 					break;
 				case '13':
+					shipId = eWing3;
+					break;
+				case '14':
+					shipId = kWing2;
+					break;
+				case '15':
+					shipId = kWing4;
+					break;	
+				case '16':
 					shipId = yt1300;
 					break;				
 			}
@@ -433,7 +445,7 @@
 			xWing2.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '2TL'];
 			xWing2.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '2TR'];
 			xWing2.OBL = ['4K', '4K', '3TL', '2TL', '2TL', '2TL'];
-			xWing2.OBR = ['4K', '4K', '2TR', '2TR', '2TR', '2TR'];
+			xWing2.OBR = ['4K', '4K', '3TR', '2TR', '2TR', '2TR'];
 			xWing2.OB = ['4K', '4K', '4K', '4K', '2TL', '2TR'];
 			xWing2.ITL = ['2TL', '2TL', '1BL', '1BL', '1BL', '1F'];
 			xWing2.ITR = ['2TR', '2TR', '1BR', '1BR', '1BR', '1F'];
@@ -451,7 +463,7 @@
 			xWing4.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '2TL'];
 			xWing4.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '2TR'];
 			xWing4.OBL = ['4K', '4K', '3TL', '2TL', '2TL', '2TL'];
-			xWing4.OBR = ['4K', '4K', '2TR', '2TR', '2TR', '2TR'];
+			xWing4.OBR = ['4K', '4K', '3TR', '2TR', '2TR', '2TR'];
 			xWing4.OB = ['4K', '4K', '4K', '4K', '2TL', '2TR'];
 			xWing4.ITL = ['2TL', '2TL', '1BL', '1BL', '1BL', '1F'];
 			xWing4.ITR = ['2TR', '2TR', '1BR', '1BR', '1BR', '1F'];
@@ -481,80 +493,81 @@
 			yt1300.IB = ['4K', '4K', '4K', '1TL', '1TR', '1F'];
 			yt1300.RED = ['4K','3L'];
 
-			tPhan.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-			tPhan.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-			tPhan.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-			tPhan.OL = ['1TL', '1TL', '2TL', '2TL', '3TL', '2BL'];
-			tPhan.OR = ['1TR', '1TR', '2TR', '2TR', '3TR', '2BR'];
-			tPhan.OBL = ['4K', '3K', '3K', '2TL', '2TL', '1TL'];
-			tPhan.OBR = ['4K', '3K', '3K', '2TR', '2TR', '1TR'];
-			tPhan.OB = ['3K', '3K', '3K', '3K', '1TL', '1TR'];
-			tPhan.ITL = ['2F', '2BL', '4K', '4K', '1TL', '1TL'];
-			tPhan.ITR = ['2F', '2BR', '4K', '4K', '1TR', '1TR'];
-			tPhan.IT = ['2BL', '2BR', '2F', '4K', '4K', '4K'];
-			tPhan.IL = ['1TL', '1TL', '1TL', '2TL', '2TL', '4K'];
-			tPhan.IR = ['1TR', '1TR', '1TR', '2TR', '2TR', '4K'];
-			tPhan.IBL = ['1TL', '1TL', '2TL', '3K', '4K', '4K'];
-			tPhan.IBR = ['1TR', '1TR', '2TR', '3K', '4K', '4K'];
-			tPhan.IB = ['4K', '3K', '3K', '3TL', '3TR', '4F'];
-			tPhan.RED = ['4K', '3K'];
+			eWing1.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			eWing1.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			eWing1.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+			eWing1.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '2TL'];
+			eWing1.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '2TR'];
+			eWing1.OBL = ['4K', '4K', '3TL', '3TL', '2TL', '2TL'];
+			eWing1.OBR = ['4K', '4K', '3TR', '3TR', '2TR', '2TR'];
+			eWing1.OB = ['3K', '3K', '3K', '3K', '3TL', '3TR'];
+			eWing1.ITL = ['1K', '2K', '2K', '1F', '2BL', '2BL'];
+			eWing1.ITR = ['1K', '2K', '2K', '2BR', '2BR', '1F'];
+			eWing1.IT = ['1BL', '1BR', '1F', '1F', '4K', '4K'];
+			eWing1.IL = ['1BL', '2TL', '2TL', '2TL', '3K', '4K'];
+			eWing1.IR = ['1BR', '2TR', '2TR', '2TR', '3K', '4K'];
+			eWing1.IBL = ['2TL', '3K', '3K', '3K', '4K', '4K'];
+			eWing1.IBR = ['2TR', '2K', '3K', '3K', '4K', '4K'];
+			eWing1.IB = ['3K', '4K', '4K', '3TL', '3TR', '5F'];
+			eWing1.RED = ['4K', '3K','1K','2K'];
 
-			tBomber.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-			tBomber.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-			tBomber.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-			tBomber.OL = ['3BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
-			tBomber.OR = ['3BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
-			tBomber.OBL = ['5K', '5K', '2TL', '2TL', '3TL', '3TL'];
-			tBomber.OBR = ['5K', '5K', '2TR', '2TR', '3TR', '3TR'];
-			tBomber.OB = ['5K', '5K', '5K', '5K', '2TL', '2TR'];
-			tBomber.ITL = ['3TL', '1F', '1BL', '1BL', '1BL', '5K'];
-			tBomber.ITR = ['3TR', '1F', '1BR', '1BR', '1BR', '5K'];
-			tBomber.IT = ['1BL', '1BR', '1F', '1F', '1F', '5K'];
-			tBomber.IL = ['1BL', '2TL', '2TL', '3TL', '3TL', '3TL'];
-			tBomber.IR = ['1BR', '2TR', '2TR', '3TR', '3TR', '3TR'];
-			tBomber.IBL = ['5K', '5K', '5K', '3TL', '3TL', '2TL'];
-			tBomber.IBR = ['5K', '5K', '5K', '3TR', '3TR', '2TR'];
-			tBomber.IB = ['5K', '5K', '5K', '5K', '3TL', '3TR'];
-			tBomber.RED = ['5K', '2T', '2TL', '2TR'];
+			eWing3.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
+			eWing3.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
+			eWing3.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
+			eWing3.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '2TL'];
+			eWing3.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '2TR'];
+			eWing3.OBL = ['4K', '4K', '3TL', '3TL', '2TL', '2TL'];
+			eWing3.OBR = ['4K', '4K', '3TR', '3TR', '2TR', '2TR'];
+			eWing3.OB = ['3K', '3K', '3K', '3K', '3TL', '3TR'];
+			eWing3.ITL = ['1K', '2K', '2K', '1F', '2BL', '2BL'];
+			eWing3.ITR = ['1K', '2K', '2K', '2BR', '2BR', '1F'];
+			eWing3.IT = ['1BL', '1BR', '1F', '1F', '4K', '4K'];
+			eWing3.IL = ['1BL', '2TL', '2TL', '2TL', '3K', '4K'];
+			eWing3.IR = ['1BR', '2TR', '2TR', '2TR', '3K', '4K'];
+			eWing3.IBL = ['2TL', '3K', '3K', '3K', '4K', '4K'];
+			eWing3.IBR = ['2TR', '2K', '3K', '3K', '4K', '4K'];
+			eWing3.IB = ['3K', '4K', '4K', '3TL', '3TR', '5F'];
+			eWing3.RED = ['4K', '3K','1K','2K'];
 
-			tDef.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
-			tDef.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
-			tDef.OT = ['5F', '5F', '5F', '4F', '4F', '3F'];
-			tDef.OL = ['1BL', '2BL', '2TL', '3TL', '3TL', '3TL'];
-			tDef.OR = ['1BR', '2BR', '2TR', '3TR', '3TR', '3TR'];
-			tDef.OBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
-			tDef.OBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
-			tDef.OB = ['4K', '4K', '4K', '4K', '1TL', '1TR'];
-			tDef.ITL = ['2F', '1BL', '1BL', '4K', '4K', '1TL'];
-			tDef.ITR = ['2F', '1BR', '1BR', '4K', '4K', '1TR'];
-			tDef.IT = ['1BL', '1BR', '2F', '2F', '4K', '4K'];
-			tDef.IL = ['1BL', '4K', '4K', '2TL', '1TL', '1TL'];
-			tDef.IR = ['1BR', '4K', '4K', '2TR', '1TR', '1TR'];
-			tDef.IBL = ['4K', '4K', '4K', '2TL', '2TL', '1TL'];
-			tDef.IBR = ['4K', '4K', '4K', '2TR', '2TR', '1TR'];
-			tDef.IB = ['4K', '4K', '4K', '4K', '3TL', '3TR'];
-			tDef.RED = ['1T', '2TL', '2TR', '1TL', '1TR'];
+			kWing2.OTL = ['3F', '2BL', '2BL', '3BL', '3BL', '2TL'];
+			kWing2.OTR = ['3F', '2BR', '2BR', '3BR', '3BR', '2TR'];
+			kWing2.OT = ['3F', '3F', '3F', '3F', '2F', '2F'];
+			kWing2.OL = ['3BL', '2BL', '2BL', '2TL', '2TL', '1BL'];
+			kWing2.OR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
+			kWing2.OBL = ['2TL', '2TL', '2TL', '2BL', '2BL', '1BL'];
+			kWing2.OBR = ['2TL', '2TL', '2TR', '2BR', '2BR', '1BR'];
+			kWing2.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
+			kWing2.ITL = ['2BL', '2TL', '2BL', '2BL', '3F', '3F'];
+			kWing2.ITR = ['2TR', '2TR', '2BR', '2BR', '3F', '3F'];
+			kWing2.IT = ['3F', '3F', '2BL', '2BR', '2TL', '2TR'];
+			kWing2.IL = ['3BL', '2BL', '2BL', '2TL', '1BL', '1BL'];
+			kWing2.IR = ['3BR', '2BR', '2BR', '2TR', '1BR', '1BR'];
+			kWing2.IBL = ['3BL', '2BL', '2BL', '2TL', '2TL', '1BL'];
+			kWing2.IBR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
+			kWing2.IB = ['2TL', '2TL', '2TR', '2TR', '1BR', '1BL'];
+			kWing2.RED = [];
 
-			vtDec.OTL = ['4F', '3BL', '3BL', '3BL', '2BL', '3TL'];
-			vtDec.OTR = ['4F', '3BR', '3BR', '3BR', '2BR', '3TR'];
-			vtDec.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
-			vtDec.OL = ['3BL', '3TL', '3TL', '2TL', '2TL', '1BL'];
-			vtDec.OR = ['3BR', '3TR', '3TR', '2TR', '2TR', '1BR'];
-			vtDec.OBL = ['2TL', '2TL', '2TL', '3TL', '3TL', '1BL'];
-			vtDec.OBR = ['2TR', '2TR', '2TR', '3TR', '3TR', '1BR'];
-			vtDec.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
-			vtDec.ITL = ['3BL', '3BL', '2BL', '2TL', '4F', '4F'];
-			vtDec.ITR = ['3BR', '3BR', '2BR', '2TR', '4F', '4F'];
-			vtDec.IT = ['4F', '4F', '3BL', '3BR', '3TL', '3TR'];
-			vtDec.IL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
-			vtDec.IR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
-			vtDec.IBL = ['3BL', '3BL', '3TL', '2BL', '2TL', '1BL'];
-			vtDec.IBR = ['3BR', '3BR', '3TR', '2BR', '2TR', '1BR'];
-			vtDec.IB = ['3TL', '2TL', '1B', '3TR', '2TR', '1BR'];
-			vtDec.RED = [];
+			kWing4.OTL = ['3F', '2BL', '2BL', '3BL', '3BL', '2TL'];
+			kWing4.OTR = ['3F', '2BR', '2BR', '3BR', '3BR', '2TR'];
+			kWing4.OT = ['3F', '3F', '3F', '3F', '2F', '2F'];
+			kWing4.OL = ['3BL', '2BL', '2BL', '2TL', '2TL', '1BL'];
+			kWing4.OR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
+			kWing4.OBL = ['2TL', '2TL', '2TL', '2BL', '2BL', '1BL'];
+			kWing4.OBR = ['2TL', '2TL', '2TR', '2BR', '2BR', '1BR'];
+			kWing4.OB = ['2TL', '2TL', '2TL', '2TR', '2TR', '2TR'];
+			kWing4.ITL = ['2BL', '2TL', '2BL', '2BL', '3F', '3F'];
+			kWing4.ITR = ['2TR', '2TR', '2BR', '2BR', '3F', '3F'];
+			kWing4.IT = ['3F', '3F', '2BL', '2BR', '2TL', '2TR'];
+			kWing4.IL = ['3BL', '2BL', '2BL', '2TL', '1BL', '1BL'];
+			kWing4.IR = ['3BR', '2BR', '2BR', '2TR', '1BR', '1BR'];
+			kWing4.IBL = ['3BL', '2BL', '2BL', '2TL', '2TL', '1BL'];
+			kWing4.IBR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
+			kWing4.IB = ['2TL', '2TL', '2TR', '2TR', '1BR', '1BL'];
+			kWing4.RED = [];
 
 		}
 
+		//I am so sorry. This needs to be optimized when there is time.
 		var createSteps = function() {
 			z952.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li></ol></li><li><b>Select Maneuver</b><p>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.</p</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc, and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> if you have a shot</li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-modification'></i> <b>Vectored Thrusters</b></br>Your action bar gains the <i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> action icon.</p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></li></ol>";
 
@@ -580,16 +593,13 @@
 
 			xWing4.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> nearest enemy in arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> nearest enemy</li></ol></li><li><b>Attack Target</b><ol><li><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> if possible </li><li>Nearest Enemy in arc</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> <b>Proton Torpedo </b></br>Spend <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> to fire. Range 2-3. 4 Atk. Turn 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> into a <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i>.</p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></ol>";
 
-			tBomber.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc and at Range 1-3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Action vs. Target</li></ol></li><li><b>Select Maneuver</b><br>Check target's Range &amp; Direction, Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> moves.<li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc, and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> if you have a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-evade'></i></li></ol></li><li><b>Attack Target</b><ol><li>Enemy you have <i class='xwing-miniatures-font xwing-miniatures-font-evade'></i> on</li><li>Nearest enemy<br><span class='red'>Fire <i class='xwing-miniatures-font xwing-miniatures-font-missile'></i> if possible</span><br>Clear <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> if unspent</li></ol></li></ol>";
+			eWing1.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get out of arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy in arc</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-astromech'></i> <b>R7 Astromech </b></br>When defending you may spend your <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> to make the attacker reroll all <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i> and <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i> results.</p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></ol>";
 
-			tPhan.steps = "<ol><li><b>Roll to Decloak at PS0</b><ul><li>1:2 - Left</li><li>3:4 - Forward</li><li>5:6 - Right</li></ul>Back to Front; Reroll if blocked</li><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-evade'></i> Action</li></ol></li><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction.<br>Roll on the matching table &amp; Skip step 4 on <span class='red'>red</span> maneuvers</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> if you have a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-cloak'></i></ol></li><li><b>Attack Target</b><ol><li>Nearest enemy</li></ol></li><li><b>At the end of round:</b><ul><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-cloak'></i> Action</li></ul></li></ol>";
+			eWing3.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> &amp; <i class='xwing-miniatures-font xwing-miniatures-font-evade'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get out of arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> if possible </li><li>Nearest Enemy in arc</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> <b>Proton Torpedo </b></br>Spend <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> to fire. Range 2-3. 4 Atk. Turn 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> or blank into a <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i> and 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> into a <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i>.</p><p><i class='xwing-miniatures-font xwing-miniatures-font-astromech'></i> <b>R7 Astromech </b></br>When defending you may spend your <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> to make the attacker reroll all <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i> and <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i> results.</p><p><i class='xwing-miniatures-font xwing-miniatures-font-system'></i> <b> Advanced Sensors</b></p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></ol>";
 
-			tBomber.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Action vs. Target</li></ol></li><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction.<br>Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li>Enemy you have <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> on</li><li>Nearest enemy</li><li><span class='red'>Fire <i class='xwing-miniatures-font xwing-miniatures-font-missile'></i> or <i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> if possible</span></li><li>Clear <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> if unspent</li></ol></li></ol>";
+			kWing2.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-slam'></i> if fleeing</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Nearest enemy at Range 2-3</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Nearest enemy</li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy in arc at Range 2</li><li>Enemy with <i class='xwing-miniatures-font xwing-miniatures-font-turret'></i></li><li>if possible, nearest enemy at Range 2-3</li><li>Nearest Enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-turret'></i> <b>Twin Laser Turret </b></br>Range 2-3. 3 Atk. Perform this attack twice. If this attack hits, cancel all dice results and deal 1 damage to the defender.</p><p><i class='xwing-miniatures-font xwing-miniatures-font-crew'></i><b> Tactician</b><br>When you perform an attack at Range 2, the defender receives a stress token</p><li><b>Flee at 2 or less Health:</b> <ol><li>The K-Wing does not have a hyperdrive so flee to nearest edge at fastest speed.</li></ol></li></ol>";
 
-			tDef.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Action vs. Target</li></ol></li><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction.<br>Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to get a shot</li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> to avoid target's arc and keep target in your arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li>Enemy you have <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> on</li><li>Nearest enemy</li><li><span class='red'>Fire <i class='xwing-miniatures-font xwing-miniatures-font-cannon'></i> if at Range 2-3</span></li><li>Clear <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> if unspent</li></ol></li></ol>";
-
-			vtDec.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Action vs. Target</li></ol></li><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction.<br>Roll on the matching table</li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>First Attack</b><ol><li>Enemy you have <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> on</li><li>Nearest enemy</li></ol></li><li><b>Second Attack</b><ol><li>Nearest enemy you have not already attacked this round</li></ol></li><li>Clear <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> if unspent</li></ol>";
-
+			kWing4.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Acquire 2 Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-slam'></i> if fleeing</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li>If target does not have shields or if this ship does not have a <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> use Torpedo, otherwise use missile.</li><li>Nearest enemy with <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> at Range 2-3</li><li>Nearest enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> <b>Proton Torpedo &amp; Guidance Chips x2</b></br>Spend <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Range 2-3. 4 Atk. Turn 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> or blank into a <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i> and 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> into a <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></p><p><i class='xwing-miniatures-font xwing-miniatures-font-missile'></i><b>Concussion Missiles &amp; Guidance Chips x2</b></br>Spend <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Range 2-3. 4 Atk. Turn 1 blank into a <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i> and 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> into a <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i></p><p><i class='xwing-miniatures-font xwing-miniatures-font-crew'></i><b> Weapons Engineer</b></p><li><b>Flee at 2 or less Health:</b> <ol><li>The K-Wing does not have a hyperdrive so flee to nearest edge at fastest speed.</li></ol></li></ol>";
 		}
 
 		createMoves();
