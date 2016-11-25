@@ -42,6 +42,7 @@
 				<option value="14">K-Wing (PS 2)</option>
 				<option value="15">K-Wing (PS 4)</option>
 				<option value="16">YT-1300 (3 ATK)</option>
+				<option value="17">YT-2400</option>
 		    </select>
 		</div>
 <!-- 		</form> -->
@@ -82,7 +83,7 @@
 <script>
 	$(document).ready(function() {
 		var shipId;
-		var z952 = {}, z954 = {}, yWing2 = {}, yWing4 = {}, bWing2 = {}, bWing4 = {}, hwk290 = {}, yt1300 = {}; xWing2 = {}, xWing4 = {}, aWing1 = {}, aWing3 = {}, eWing1 = {}, eWing3 = {}, kWing2 = {}, kWing4 = {},
+		var z952 = {}, z954 = {}, yWing2 = {}, yWing4 = {}, bWing2 = {}, bWing4 = {}, hwk290 = {}, yt1300 = {}; xWing2 = {}, xWing4 = {}, aWing1 = {}, aWing3 = {}, eWing1 = {}, eWing3 = {}, kWing2 = {}, kWing4 = {}, yt2400 = {},
 
 		$('#shipType').change(function() {
 			shipId = this.value;
@@ -134,7 +135,10 @@
 					break;	
 				case '16':
 					shipId = yt1300;
-					break;				
+					break;
+				case '17':
+					shipId = yt2400;
+					break;						
 			}
 
 			$('#shipSteps').html(shipId.steps);
@@ -491,7 +495,7 @@
 			yt1300.IBL = ['2TL', '2TL', '1TL', '1TL', '3K', '4K'];
 			yt1300.IBR = ['2TR', '2TR', '1TR', '1TR', '3K', '4K'];
 			yt1300.IB = ['4K', '4K', '4K', '1TL', '1TR', '1F'];
-			yt1300.RED = ['4K','3L'];
+			yt1300.RED = ['4K','3K'];
 
 			eWing1.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			eWing1.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -565,6 +569,23 @@
 			kWing4.IB = ['2TL', '2TL', '2TR', '2TR', '1BR', '1BL'];
 			kWing4.RED = [];
 
+			yt2400.OTL = ['4F', '3BL', '3BL', '2BL', '2TL', '3TL'];
+			yt2400.OTR = ['4F', '3BR', '3BR', '2BR', '2TR', '3TR'];
+			yt2400.OT = ['4F', '4F', '4F', '3F', '3F', '2F'];
+			yt2400.OL = ['3BL', '3BL', '3TL', '3TL', '1BL', '1TL'];
+			yt2400.OR = ['3BR', '3BR', '3TR', '3TR', '1BR', '1TR'];
+			yt2400.OBL = ['4K', '3TL', '2TL', '2TL', '2TL', '1TL'];
+			yt2400.OBR = ['4K', '3TR', '2TR', '2TR', '2TR', '1TR'];
+			yt2400.OB = ['4K', '4K', '1TL', '1TR', '2TL', '2TR'];
+			yt2400.ITL = ['3BL', '3BL', '2TL', '1TL', '1BL', '4F'];
+			yt2400.ITR = ['3BR', '3BR', '2TR', '1TR', '1BR', '4F'];
+			yt2400.IT = ['4F', '4F', '3BL', '3BR', '2TL', '2TR'];
+			yt2400.IL = ['3BL', '3BL', '1BL', '2TL', '1TL', '4K'];
+			yt2400.IR = ['3BR', '3BR', '1BR', '2TR', '1TR', '4K'];
+			yt2400.IBL = ['2TL', '1TL', '1TL', '1BL', '1BL', '4K'];
+			yt2400.IBR = ['2TR', '1TR', '1TR', '1BR', '1BR', '4K'];
+			yt2400.IB = ['4K', '4K', '4K', '1TL', '1TR', '1F'];
+			yt2400.RED = ['4K',];
 		}
 
 		//I am so sorry. This needs to be optimized when there is time.
@@ -600,6 +621,8 @@
 			kWing2.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-slam'></i> if fleeing</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Nearest enemy at Range 2-3</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Nearest enemy</li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy in arc at Range 2</li><li>Enemy with <i class='xwing-miniatures-font xwing-miniatures-font-turret'></i></li><li>if possible, nearest enemy at Range 2-3</li><li>Nearest Enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-turret'></i> <b>Twin Laser Turret </b></br>Range 2-3. 3 Atk. Perform this attack twice. If this attack hits, cancel all dice results and deal 1 damage to the defender.</p><p><i class='xwing-miniatures-font xwing-miniatures-font-crew'></i><b> Tactician</b><br>When you perform an attack at Range 2, the defender receives a stress token</p><li><b>Flee at 2 or less Health:</b> <ol><li>The K-Wing does not have a hyperdrive so flee to nearest edge at fastest speed.</li></ol></li></ol>";
 
 			kWing4.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Acquire 2 Free <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-slam'></i> if fleeing</li><li><i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol></li><li><b>Attack Target</b><ol><li>If target does not have shields or if this ship does not have a <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> use Torpedo, otherwise use missile.</li><li>Nearest enemy with <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> at Range 2-3</li><li>Nearest enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-torpedo'></i> <b>Proton Torpedo &amp; Guidance Chips x2</b></br>Spend <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Range 2-3. 4 Atk. Turn 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> or blank into a <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i> and 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> into a <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></p><p><i class='xwing-miniatures-font xwing-miniatures-font-missile'></i><b>Concussion Missiles &amp; Guidance Chips x2</b></br>Spend <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Range 2-3. 4 Atk. Turn 1 blank into a <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i> and 1 <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i> into a <i class='xwing-miniatures-font xwing-miniatures-font-hit'></i></p><p><i class='xwing-miniatures-font xwing-miniatures-font-crew'></i><b> Weapons Engineer</b></p><li><b>Flee at 2 or less Health:</b> <ol><li>The K-Wing does not have a hyperdrive so flee to nearest edge at fastest speed.</li></ol></li></ol>";
+
+			yt2400.steps = "<ol><li><b>Select Target</b><ol><li>Nearest Enemy in Arc &amp; Range 1 - 3</li><li>Nearest Enemy</li><li>Free <i class='xwing-miniatures-font xwing-miniatures-font-focus'></i></li></ol><li><b>Select Maneuver</b><br>Check Target's Range &amp; Direction. Roll on the matching table &amp; Skip step 3 on <span class='red'>red</span> maneuvers</li></li><li><b>Action Selection</b><ol><li>Remove stress or Resolve <i class='xwing-miniatures-font xwing-miniatures-font-crit'></i></li><li><i class='xwing-miniatures-font xwing-miniatures-font-barrelroll'></i> out of arc</li><li><i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i> Nearest enemy</li></ol></li><li><b>Attack Target</b><ol><li>Nearest Enemy with <i class='xwing-miniatures-font xwing-miniatures-font-targetlock'></i></li><li>Nearest Enemy</li></ol><p><i class='xwing-miniatures-font xwing-miniatures-font-crew'></i> <b>Gunner </b></br>After performing an attack that does not hit, immediately perform a primary weapon attack.</p><p><i class='xwing-miniatures-font xwing-miniatures-font-modification'></i><b> Tactical Jammer</b><br>You may obstruct enemy attacks</p><li><b>Flee at 2 or less Health:</b> <ol><li>If facing edge at Range 2 move at fastest speed or hyperdrive</li></ol></li></ol>";
 		}
 
 		createMoves();
