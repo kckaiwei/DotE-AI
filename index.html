@@ -73,6 +73,8 @@
 					<div class="ui-body" id="close"></div>
 					<h3 class="ui-bar ui-bar-a">Range 2/3</h3>
 					<div class="ui-bar" id="far"></div>
+					<h3 class="ui-bar ui-bar-a">Hyperspace Jump</h3>
+					<div class="ui-bar" id="jump"></div>
 				</div>
 		</div>
 
@@ -161,7 +163,9 @@
 		var generateMoves = function(id) {
 			$('#close').removeClass('red');
 			$('#far').removeClass('red');
-			var close, far;
+			$('#jump').removeClass('red');
+			var close, far, jump;
+			jump = 'JUMP';
 			switch(id) {
 				case 'ul':
 					close = 'ITL';
@@ -199,8 +203,10 @@
 			//Sets the actual text
 			var textClose = shipId[close][randomize()];
 			var textFar = shipId[far][randomize()];
+			var textJump = shipId[jump][randomize()];
 			$('#close').html(returnIcon(textClose));
 			$('#far').html(returnIcon(textFar));
+			$('#jump').html(returnIcon(textJump));
 			for (r in shipId.RED) {
 				if (textClose == shipId.RED[r]) {
 					$('#close').addClass('red');
@@ -309,6 +315,7 @@
 			z952.IBR = ['2TR', '2TR', '3TR', '3K', '3K', '3K'];
 			z952.IB = ['3K', '3K', '3K', '2TL', '2TR', '4F'];
 			z952.RED = ['3K'];
+			z952.JUMP = ['1F','1F','2F','2F','2BR','2BL'];
 
 			z954.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			z954.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -327,6 +334,7 @@
 			z954.IBR = ['2TR', '2TR', '3TR', '3K', '3K', '3K'];
 			z954.IB = ['3K', '3K', '3K', '2TL', '2TR', '4F'];
 			z954.RED = ['3K'];
+			z954.JUMP = ['1F','1F','2F','2F','2BR','2BL'];
 
 			yWing2.OTL = ['2F', '3BL', '2BL', '2BL', '2TL', '2TL'];
 			yWing2.OTR = ['2F', '3BR', '2BR', '2BR', '2TR', '2TR'];
@@ -345,6 +353,7 @@
 			yWing2.IBR = ['3TR', '2TR', '2TR', '4K', '4K', '4K'];
 			yWing2.IB = ['4K', '4K', '4K', '2TL', '2TR', '3F'];
 			yWing2.RED = ['4F','3TL','3TR','4K'];
+			yWing2.JUMP = ['1F','1F','1F','1F','2F','2F'];
 
 			yWing4.OTL = ['2F', '3BL', '2BL', '2BL', '2TL', '2TL'];
 			yWing4.OTR = ['2F', '3BR', '2BR', '2BR', '2TR', '2TR'];
@@ -363,6 +372,7 @@
 			yWing4.IBR = ['3TR', '2TR', '2TR', '4K', '4K', '4K'];
 			yWing4.IB = ['4K', '4K', '4K', '2TL', '2TR', '3F'];
 			yWing4.RED = ['4F','3TL','3TR','4K'];
+			yWing4.JUMP = ['1F','1F','1F','1F','2F','2F'];
 
 			bWing2.OTL = ['2F', '2BL', '2BL', '2TL', '2TL', '3BL'];
 			bWing2.OTR = ['2F', '2BR', '2BR', '2TR', '2TR', '3BR'];
@@ -381,6 +391,7 @@
 			bWing2.IBR = ['2K', '2K', '2K', '2TR', '2TR', '1TR'];
 			bWing2.IB = ['2K', '2K', '2K', '3F', '1TL', '1TR'];
 			bWing2.RED = ['4F','2K','1TL','1TR','3BR','3BL'];
+			bWing2.JUMP = ['1F','1F','2F','2F','1BR','1BL'];
 
 			bWing4.OTL = ['2F', '2BL', '2BL', '2TL', '2TL', '3BL'];
 			bWing4.OTR = ['2F', '2BR', '2BR', '2TR', '2TR', '3BR'];
@@ -399,6 +410,7 @@
 			bWing4.IBR = ['2K', '2K', '2K', '2TR', '2TR', '1TR'];
 			bWing4.IB = ['2K', '2K', '2K', '3F', '1TL', '1TR'];
 			bWing4.RED = ['4F','2K','1TL','1TR','3BR','3BL'];
+			bWing4.JUMP = ['1F','1F','2F','2F','1BR','1BL'];
 
 			hwk290.OTL = ['4F', '3F', '2BL', '2BL', '2TL', '3BL'];
 			hwk290.OTR = ['4F', '3F', '2BR', '2BR', '2TR', '3BR'];
@@ -417,6 +429,7 @@
 			hwk290.IBR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
 			hwk290.IB = ['2TL', '2TL', '2TR', '2TR', '1BL', '1BR'];
 			hwk290.RED = ['3BR','3BL','4F'];
+			hwk290.JUMP = ['1F','1F','2F','2F','1BR','1BL'];
 
 			aWing1.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			aWing1.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -435,6 +448,7 @@
 			aWing1.IBR = ['3TR', '3TR', '2TR', '3K', '5K', '5K'];
 			aWing1.IB = ['5K', '3K', '3K', '3TL', '3TR', '5F'];
 			aWing1.RED = ['3K','5K'];
+			aWing1.JUMP = ['5F','5F','2TL','2TL','2TR','2TR'];
 
 			aWing3.OTL = ['3F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			aWing3.OTR = ['3F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -453,6 +467,7 @@
 			aWing3.IBR = ['3TR', '3TR', '2TR', '3K', '5K', '5K'];
 			aWing3.IB = ['5K', '3K', '3K', '3TL', '3TR', '5F'];
 			aWing3.RED = ['3K','5K'];
+			aWing3.JUMP = ['5F','5F','2TL','2TL','2TR','2TR'];
 
 			xWing2.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			xWing2.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -471,6 +486,7 @@
 			xWing2.IBR = ['2TR', '2TR', '3TR', '4K', '4K', '4K'];
 			xWing2.IB = ['4K', '4K', '4K', '2TL', '2TR', '4F'];
 			xWing2.RED = ['4K'];
+			xWing2.JUMP = ['1F','1F','2F','2F','1BR','1BL'];
 
 			xWing4.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			xWing4.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -489,6 +505,7 @@
 			xWing4.IBR = ['2TR', '2TR', '3TR', '4K', '4K', '4K'];
 			xWing4.IB = ['4K', '4K', '4K', '2TL', '2TR', '4F'];
 			xWing4.RED = ['4K'];
+			xWing4.JUMP = ['1F','1F','2F','2F','1BR','1BL'];
 
 			yt1300.OTL = ['4F', '3BL', '3BL', '3BL', '2BL', '2TL'];
 			yt1300.OTR = ['4F', '3BR', '3BR', '3BR', '2BR', '2TR'];
@@ -507,6 +524,7 @@
 			yt1300.IBR = ['2TR', '2TR', '1TR', '1TR', '3K', '4K'];
 			yt1300.IB = ['4K', '4K', '4K', '1TL', '1TR', '1F'];
 			yt1300.RED = ['4K','3K'];
+			yt1300.JUMP = ['1F','1F','2F','2F','1BR','1BL'];
 
 			eWing1.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			eWing1.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -525,6 +543,7 @@
 			eWing1.IBR = ['2TR', '2K', '3K', '3K', '4K', '4K'];
 			eWing1.IB = ['3K', '4K', '4K', '3TL', '3TR', '5F'];
 			eWing1.RED = ['4K', '3K','1K','2K'];
+			eWing1.JUMP = ['1F','2F','3F','3F','1BR','1BL'];
 
 			eWing3.OTL = ['2F', '2BL', '3BL', '3BL', '3BL', '3TL'];
 			eWing3.OTR = ['2F', '2BR', '3BR', '3BR', '3BR', '3TR'];
@@ -543,6 +562,7 @@
 			eWing3.IBR = ['2TR', '2K', '3K', '3K', '4K', '4K'];
 			eWing3.IB = ['3K', '4K', '4K', '3TL', '3TR', '5F'];
 			eWing3.RED = ['4K', '3K','1K','2K'];
+			eWing3.JUMP = ['1F','2F','3F','3F','1BR','1BL'];
 
 			kWing2.OTL = ['3F', '2BL', '2BL', '3BL', '3BL', '2TL'];
 			kWing2.OTR = ['3F', '2BR', '2BR', '3BR', '3BR', '2TR'];
@@ -561,6 +581,7 @@
 			kWing2.IBR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
 			kWing2.IB = ['2TL', '2TL', '2TR', '2TR', '1BR', '1BL'];
 			kWing2.RED = [];
+			kWing2.JUMP = ['','','','','',''];
 
 			kWing4.OTL = ['3F', '2BL', '2BL', '3BL', '3BL', '2TL'];
 			kWing4.OTR = ['3F', '2BR', '2BR', '3BR', '3BR', '2TR'];
@@ -579,6 +600,7 @@
 			kWing4.IBR = ['3BR', '2BR', '2BR', '2TR', '2TR', '1BR'];
 			kWing4.IB = ['2TL', '2TL', '2TR', '2TR', '1BR', '1BL'];
 			kWing4.RED = [];
+			kWing4.JUMP = ['','','','','',''];
 
 			yt2400.OTL = ['4F', '3BL', '3BL', '2BL', '2TL', '3TL'];
 			yt2400.OTR = ['4F', '3BR', '3BR', '2BR', '2TR', '3TR'];
@@ -597,6 +619,7 @@
 			yt2400.IBR = ['2TR', '1TR', '1TR', '1BR', '1BR', '4K'];
 			yt2400.IB = ['4K', '4K', '4K', '1TL', '1TR', '1F'];
 			yt2400.RED = ['4K',];
+			yt2400.JUMP = ['1F','1F','2F','2F','1BR','1BL'];
 		}
 
 		//I am so sorry. This needs to be optimized when there is time.
