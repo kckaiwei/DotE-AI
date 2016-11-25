@@ -1,3 +1,7 @@
+.center {
+  text-align: center;
+}
+
 @font-face {
   font-family: XWing;
   src: url('xwing-miniatures.ttf'); }
