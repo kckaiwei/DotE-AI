@@ -12,3 +12,9 @@ Hyperspace Jump shows which direction to jump for hyperspace when fleeing
 Defenders of the Empire site:
 
 https://boardgamegeek.com/filepage/135532/defenders-empire
+
+Visit:
+
+https://kckaiwei.github.io/DotE-AI/
+
+to use the AI!
