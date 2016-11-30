@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
 ul{
   list-style:none;
 }
